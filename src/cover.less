@@ -1,0 +1,143 @@
+
+
+//总体布局
+@base: #1985ac;
+
+body{
+    // background:url("./assets/images/background.jpg") no-repeat top center fixed;
+    // -moz-background-size: cover;
+    // -webkit-background-size: cover;
+    // -o-background-size: cover;
+    // background-size: cover;
+}
+
+.ant-layout{background:transparent!important}
+
+//加载状态框限制高度
+// .ant-spin{
+//     height:320px;
+// }
+.ant-spin .ant-spin-dot{
+    margin-top:135px
+}
+
+.ant-spin-nested-loading{
+    //position:static!important;
+}
+//自定义加载动画
+.ant-spin-lg {
+   
+    .ant-spin-dot{
+        margin-top:150px;
+        width: 50px;
+        height: 50px;
+        margin-top:80px;
+        //position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        animation:none;
+        transform: rotate(0);
+        &::before {
+            content: '';
+            width: 50px;
+            height: 5px;
+            background: #000;
+            opacity: 0.1;
+            position: absolute;
+            top: 59px;
+            left: 0;
+            border-radius: 50%;
+            animation: shadow .5s linear infinite;
+          }
+          &::after {
+            content: '';
+            width: 50px;
+            height: 50px;
+            background: #1985ac;
+            animation: animate .5s linear infinite;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border-radius: 3px;
+          }
+    }
+    .ant-spin-dot i{
+        display:none;
+    }
+    
+}
+
+@keyframes animate {
+    17% {
+      border-bottom-right-radius: 3px;
+    }
+    25% {
+      transform: translateY(9px) rotate(22.5deg);
+    }
+    50% {
+      transform: translateY(18px) scale(1, .9) rotate(45deg);
+      border-bottom-right-radius: 40px;
+    }
+    75% {
+      transform: translateY(9px) rotate(67.5deg);
+    }
+    100% {
+      transform: translateY(0) rotate(90deg);
+    }
+  }
+
+  @keyframes shadow {
+    0%, 100% {
+      transform: scale(1, 1);
+    }
+    50% {
+      transform: scale(1.2, 1);
+    }
+  }
+
+.ant-spin-lg .ant-spin-text{
+    padding-top:45px!important
+}
+
+
+//表格暂无数据提示
+.ant-table-placeholder{
+    padding:80px 8px!important;
+    border-bottom:0!important;
+}
+.lee-table{
+    min-height:320px
+}
+//美化webkit内核滚动条
+::-webkit-scrollbar {width: 8px;height: 8px;}
+::-webkit-scrollbar-thumb {background-color: #777;}
+
+.lee-layout-center{
+        width:96%;
+        margin:0 auto;
+   }
+.lee-text-center{
+    text-align: center;
+    color: #666;
+}
+   
+@media screen and (min-width: 1200px) {
+   .lee-layout-center{
+        width:1200px;
+        margin:0 auto;
+   }
+   .ant-modal{
+      top:300px
+   }
+}
+
+@media screen and (max-width: 768px) {
+.lee-xs-hidden{
+    display:none;
+}
+.ant-modal{
+    top:100px
+ }
+}

@@ -1,0 +1,5 @@
+
+//编辑楼栋模态框
+export const EDIT_ROOM_START = 'EDIT_ROOM/START'
+export const EDIT_ROOM_SUCCESS = 'EDIT_ROOM/SUCCESS'
+export const EDIT_ROOM_FAILURE = 'EDIT_ROOM/FAILURE'

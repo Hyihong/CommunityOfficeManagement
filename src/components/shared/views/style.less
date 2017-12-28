@@ -1,0 +1,173 @@
+
+@base: #1985ac;
+//头部
+.lee-header{
+    .ant-layout-header{ 
+        background:#fff;
+        padding:0;
+        border-bottom: 2px solid #e6e6e6;
+        z-index:10;
+    }
+
+    .logo{
+       color:#e46713;
+       font-size:18px;
+       img{
+          float:left;
+          height:30px;
+          margin:17px 0;
+       }
+       span{
+          float:left;
+          padding:0 10px;
+          margin-top:3px;
+       }
+       .anticon.anticon-left{
+           display:none;
+           float: left;
+           color:rgba(0,0,0,0.65);
+           font-size:25px;
+           line-height:50px;
+       }
+       b{
+          float:left;
+          position:relative;
+          margin-left:8px;
+          letter-spacing: 2px;
+          line-height: 40px;
+          margin-top:16px;
+          color:#e46713;
+        //   text-shadow: -1px -1px 1px rgba(0,0,0,0.1);
+       }
+       b:after{
+            content:"办事处管理系统";
+            position:absolute;
+    
+            //background:#e46713;
+            // background: -webkit-repeating-linear-gradient(-45deg,#fff,#e46713, #014589,#fff);
+            //background: -webkit-repeating-linear-gradient(-45deg,#eee,#595B54,#978A8A,#E46510);
+            //background:#e46713;
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            animation:animateTextBackground 10s ease-in-out infinite;
+            top: 0px;
+            left: 0;
+            right: 0;
+       }
+    }
+    .menu-fold:hover{
+           transform: scale(1.2);
+           color:@base;
+           cursor:pointer;
+    }
+    .right-menu{
+        .ant-menu-horizontal{border-bottom:none}
+        .ant-menu{
+            line-height: 30px;margin-top:15px;
+            .ant-menu-item{
+                margin:0 6px;
+            }
+        }
+        .ant-avatar{float:left;margin:12px;}
+        .username{float:left;margin:0 10px 0 -8px;}
+    }
+}
+
+//内容容器
+.lee-containter{
+    margin-top:64px;
+}
+
+//返回条
+.lee-return-bar{
+    //margin:10px 0;
+   height: 130px;
+  //margin-bottom: 13px;
+  >div{
+    position: absolute;
+    left:0;
+    right:0;
+    height:120px;
+    background:url("../../../assets/images/project/project-bg.png") no-repeat;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+   .ant-btn{
+     margin-right: 15px;
+     position: relative;
+     top:85px;
+   }
+}
+.text{
+  h1 {
+    text-align: center;
+    //background: url("../../../assets/images/explain.png") no-repeat;
+    padding-top: 40px;
+    color: #fafafa;
+    letter-spacing: 7px;
+    font-size: 30px;
+    text-shadow:1px 1px 0 #CCC,2px 2px 0 #CCC,3px 3px 0 #444,4px 4px 0 #444,5px 5px 0 #444,6px 6px 0 #444;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width: 825px){
+  .lee-header{
+    b,span{
+      display: none;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+     .lee-containter{
+        margin-top:50px;
+     }
+
+     .lee-header{
+        .ant-layout-header{
+            height:50px;
+            line-height:50px;
+        }
+        .logo{
+            img{
+               float:left;
+               height:26px;
+               margin:12px 5px;
+            }
+            .anticon.anticon-left{
+                display:block;
+            }
+        }
+        .right-menu{
+            .ant-menu{
+                background:rgba(0,0,0,0.8);
+                z-index:51;
+                margin-top:0;
+                a{
+                    color:#fff!important;
+                }
+            }
+            .collapsed{
+                height:0;
+                overflow: hidden;
+                transition: all 1s;
+            }
+            .expand{
+                height:auto;
+                overflow: hidden;
+            }
+        }
+    }
+    .lee-return-bar{
+        display:none;
+    }
+    .lee-footer{
+      display: none;
+    }
+}
+
+//兼容ie9和safari浏览器
+.ant-row-flex-end{
+  float: right;
+}

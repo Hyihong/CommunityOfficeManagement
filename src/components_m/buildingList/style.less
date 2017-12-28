@@ -1,0 +1,197 @@
+#leelen-buidling-listview{
+    .list-view-section-body{
+        transition: border 3s;
+    }
+    .build-item{
+        box-shadow:2px 3px 2px rgba(107, 106, 106, 0.3);
+        padding:8px 0 8px 18px;
+        margin-bottom: 15px;
+        background:rgba(255,255,255,1);
+        //transition: all 300ms;
+        &.enable{
+            //background:rgba(255,255,255,0.8);
+        }
+        &.disable{
+            background:rgba(221, 218, 218,0.8);
+            .switch div.switch-btn{
+                background:rgb(136, 135, 135);
+                &:before{
+                    border-color:rgb(136, 135, 135);
+                }
+            }
+            .prefix{
+                div.image{
+                    background-position:130% 140%;
+                    transform: rotate(-90deg)
+                }
+            }
+        }
+        .am-flexbox .am-flexbox-item{
+            min-width: 2px;
+        }
+        .prefix{
+            flex:0 0 22%;
+            height:100%;
+            div.image{
+                transition-duration: 300ms;
+                width:70px;
+                height:70px;
+                margin-left:10px;
+                border-radius:50%;
+                background:rgba(141, 170, 206,0.2)  -35% -30% url("../../assets/images_m/building_1.png") no-repeat;
+                background-size:150% auto;
+                //background-position: 10px 0px;
+                background-origin: 50% 50%;
+                
+            }
+        }
+        .content-wrapper{
+            .head{
+                padding:3px 10px 10px;
+                text-indent: 3px;
+                color:#2980b9;
+                font-size:20px;
+            }
+        }
+        .tag{
+            display: inline-block;
+            height: 20px;
+            position: relative;
+            content: "";
+            cursor: pointer;
+            margin: 0px 0px 0 0;
+            padding: 1px 15px 15px 3px;
+            border: 0 solid rgba(0,0,0,0);
+            -webkit-border-radius: 4px 1px 1px 4px;
+            border-radius: 4px 1px 1px 4px;
+            color: rgba(255,255,255,1);
+            text-align: center;
+            text-transform: uppercase;
+            -o-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            background: #3498db;
+            font-size:12px;
+            &:before{
+                display: inline-block;
+                z-index: 1;
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                content: "";
+                top: 3px;
+                right: -8px;
+                border: 0 solid #1abc9c;
+                -webkit-border-radius: 1px 1px 4px;
+                border-radius: 1px 1px 4px;
+                color: rgba(255,255,255,0.9);
+                background: #3498db;
+                -moz-transform: rotateY(1deg) rotateZ(-45deg) scaleX(1) scaleY(1) scaleZ(1)  ;
+                -webkit-transform: rotateY(1deg) rotateZ(-45deg) scaleX(1) scaleY(1) scaleZ(1)  ;
+                transform: rotateY(1deg) rotateZ(-45deg) scaleX(1) scaleY(1) scaleZ(1)  ;
+            }
+            &:after{
+                display: inline-block;
+                z-index: 2;
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                content: "";
+                top: 6px;
+                right: 1px;
+                border: 0 solid #018dc4;
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+                color: rgba(255,255,255,0.9);
+                background: #fcfcfc;
+                -webkit-box-shadow: 2px 2px 0 0 #2980b9 inset;
+                box-shadow: 2px 2px 0 0 #2980b9 inset;
+            }
+        }
+        .switch{
+            flex:0 0 50px;
+            div.switch-btn{
+                position:relative;
+                text-align: center;
+                text-transform: uppercase;
+                font-size: 10px;
+                line-height: 40px;
+                background: #2980b9;
+                border: none;
+                border-radius: 900px;
+                color: #fff;
+                display: block;
+                width: 40px;
+                height: 40px;   
+                position: relative;
+                transition: 0.3s;
+
+                &:before{
+                    border-radius: 50%;
+                    border: 1px solid #468cdc;
+                    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3), 0 0 15px rgba(255, 255, 255, 0.3) inset;
+                    content: "";
+                    display: block;
+                    position: absolute;
+                    height:46px;
+                    width: 46px;
+                    top:-3px;
+                    left:-3px;
+                    opacity: 1;
+                    transform: scale(1);
+                    transition: all 300ms;
+                }
+                &:active{
+                    transform: scale(1.35);
+                }
+            }
+        }
+        .edit-progress{
+            margin-left:5%;
+            .am-steps-item-icon{
+                margin-left:7px;
+            }
+            .am-steps-item-custom .am-steps-item-icon > .am-steps-icon{
+                width:10px;
+                height:10px;
+                font-size:10px;
+                margin-right:0;
+            }
+            .am-steps-item-title{
+                font-size:14px;
+                line-height: 18px;
+                margin-bottom: 2px;
+            }
+            .am-steps-vertical .am-steps-item-tail{
+                padding:20px 0 4px 0;
+            }
+            .am-steps-item-content{
+                padding-top:5px;
+            }
+            &.am-steps-vertical .am-steps-item-description{
+                padding-bottom: 0;
+                font-size:12px;
+                color:#999;
+            }
+        }
+    }
+}
+
+.am-search-input .am-search-clear{
+    top:6.5px;
+}
+
+//新增按钮
+.leelen-add-btn{
+    position: absolute;
+    width:50px;
+    height:50px;
+    border-radius:50%;
+    background:#f06060;
+    color:#fff;
+    bottom:10px;
+    left:6px;
+    text-align: center;
+    line-height: 50px;
+    font-size:25px;
+    z-index:9;
+}

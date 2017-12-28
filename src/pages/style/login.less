@@ -1,0 +1,87 @@
+/* 360*640，375*667，720*1280，1024*768，1920*1080，1366*768，1440*900 */
+
+#containter{ position:absolute;width:100%;height:100%;background:#3bb3f1 }
+.logo-could img{ width:100%;margin-top:50px;}
+
+
+#login-form-panel {position:relative; width:100%;min-height: 400px}
+#login-form-panel img { width:100%;}
+#login-form-panel  #form-box {position:absolute;width:100%;height:100%;top:0;left:0;}
+#login-form-panel  #form-box #loginForm{ width:100%;padding:20px 12.5%;background:#fff;color:#464646 ;border-radius:5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5)}
+#login-form-panel  #form-box .cofrom{position:absolute;left:0;right:0;top:15%;margin:auto;}
+#loginForm h2{ font-size:20px;text-align: center;font-weight: normal;margin-bottom: 10px;}
+#loginForm hr{ border:none; border-top:1px solid #e9e9e9;margin-bottom: 18px}
+#loginForm .ant-form-item{margin-bottom:18px;}
+#loginForm .ant-form-item-with-help {margin-bottom: 0px;}
+#loginForm label{ color:#999}
+#loginForm .ant-input-lg{height:40px}
+#loginForm .ant-form-explain{text-align: right}
+#loginForm .ant-form-item-label{height:40px;line-height: 39px;padding:0;}
+#loginForm .remember{margin-bottom: 0;margin-left: 5%;}
+#loginForm .login-form-button{width:90%;margin:0 5%;line-height: 36px;height:36px}
+#loginForm .ant-btn-primary[disabled]{background:#1985ac;color:#fff;opacity:0.6;}
+.footer-logo{position:absolute;bottom:2%;width:250px;left:5%;bottom:3%}
+.ant-modal{ top:200px!important}
+
+@media screen and (max-width:640px)  {
+    #loginForm .ant-form-item-label{line-height: 22px;padding:0;}
+}
+
+@media screen and (min-width:640px) and (max-width:768px) {
+   
+}
+
+@media screen and (max-width:768px){
+    #login-form-panel img { visibility:hidden}
+    #login-form-panel  #form-box .cofrom{
+    top:2%;
+  }
+}
+
+@media screen and (min-width:768px) and (max-width:1366px) {
+    
+}
+
+@media screen and (min-width: 1366px) {
+      #loginForm h2{ font-size:24px;}
+      #loginForm label{ font-size:15px;}
+}
+
+.placeholder {
+  position: absolute;
+  z-index: 10;
+  top: 5px;
+  left: 23px;
+  color: #d9d9d9;
+}
+
+#capsLock {
+  position: absolute;
+  z-index: 2;
+  background-color: white;
+  border: 1px solid #d9d9d9;
+  border-radius: 10px;
+  top: 37px;
+  left: -4px;
+  visibility: hidden;
+}
+
+#capsLock:before, #capsLock:after {
+  content: "";
+  display: block;
+  border-width: 10px;
+  position: absolute;
+  top: -20px;
+  left: 7px;
+  border-style: solid dashed dashed;
+  border-color: transparent transparent #d9d9d9 transparent;
+  font-size: 0;
+  line-height: 0;
+}
+
+#capsLock:after{
+  top:-18px;
+  border-color:transparent transparent #FFF transparent;
+}
+
