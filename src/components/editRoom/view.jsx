@@ -3,10 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postEditForm  } from './actions'
 import { actions as roomListAction} from "../roomList"
-import { Modal,Form,Input  } from 'antd';
+import { Modal,Form,Input,Radio  } from 'antd';
 import './style.less'
  
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 const { editRoomData } = roomListAction ;
 
 const formItemLayout = {
@@ -64,13 +65,12 @@ class EditBuildingModal extends React.Component {
             const { history,location } = this.props;
             const _ =  location.state;
             const v = getFieldsValue();
-
             //trim()
             Object.keys(v).map((key)=>{
                 v[key] = v[key]._trim();
             })
-     
-            if( _.code === v.buildingCode && _.name === v.buildingName && _.residentName === v.residentName && _.residentPhone === v.residentPhone){
+
+            if( _.code === v.buildingCode && _.name === v.buildingName && _.residentName === v.residentName && _.residentPhone === v.residentPhone && _.residentGender === v.residentGender){
                 //不提交
                 resetFields();
                 Modal.warning({
@@ -80,7 +80,7 @@ class EditBuildingModal extends React.Component {
                 history.goBack();
                 return;
             }
-            this.props.postEditForm(_.roomID,_.buildingID, v.buildingCode,v.buildingName,v.residentName,v.residentPhone);
+            this.props.postEditForm(_.roomID,_.buildingID, v.buildingCode,v.buildingName,v.residentName,v.residentPhone,v.residentGender);
             e.stopPropagation();
         }
     }
@@ -98,7 +98,6 @@ class EditBuildingModal extends React.Component {
 
         const { getFieldDecorator } = this.props.form;
         const { state } = this.props.location;
-        
         return(
             <Modal
                 title= "编辑房间" 
@@ -179,6 +178,21 @@ class EditBuildingModal extends React.Component {
                             placeholder="业主电话"/>)
                         }
                     </FormItem>
+                    <FormItem
+                        {...formItemLayout}
+                        label="业主性别"
+                    > {
+                        getFieldDecorator('residentGender',{
+                            initialValue:state.residentGender,
+                            rules:[]
+                        })(
+                            <RadioGroup>
+                                <Radio value="1">男</Radio >
+                                <Radio value="2">女</Radio >
+                            </RadioGroup>
+                        )
+                    }
+                    </FormItem>
                 </Form>
           </Modal>
         )
@@ -199,8 +213,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    postEditForm:(roomID,buildingID,code,name,rname,rphone)=>{
-        dispatch( postEditForm( roomID,buildingID,code,name,rname,rphone ))
+    postEditForm:(roomID,buildingID,code,name,rname,rphone,rgender)=>{
+        dispatch( postEditForm( roomID,buildingID,code,name,rname,rphone,rgender ))
     },
     editRoomData:(id,code,name)=>{
         dispatch( editRoomData( id,code,name ))

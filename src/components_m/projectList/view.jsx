@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { fetchAllProjects,wakeOperationPanel,saveViewSize } from './actions'
 import { Flex,ListView,Card,WhiteSpace,WingBlank,Grid,Toast   } from 'antd-mobile';
+import Transition from 'react-transition-group/Transition';
 import './style.less'
 import TopNav from '../shared/views/TopNav'
 import '../../assets/font-awesome-4.7.0/less/font-awesome.less'
@@ -13,7 +14,6 @@ class ProjectList extends React.Component {
       super(props);
       var ds = new ListView.DataSource(
         { rowHasChanged: (r1, r2) => { 
-             console.log(r1)
              return r1 !== r2 },
           sectionHeaderHasChanged:(s1,s2) => s1!==s2,
         }
@@ -44,7 +44,6 @@ class ProjectList extends React.Component {
     }
    
    componentDidMount() {
-       
         //设置列表滚动高度
         const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
         this.props.saveViewSize({
@@ -95,7 +94,6 @@ class ProjectList extends React.Component {
 
   onEndReached =()=>{
   }
-
 
   _renderRow = (rowData, sectionID, rowID, highlightRow)=>{
     return(
@@ -173,23 +171,25 @@ class ProjectList extends React.Component {
     return (
       <div>
            <TopNav home title={ this.isProjectListAuditing ? "未审核项目列表":"已审核项目列表"}></TopNav>
-           <WingBlank size="ls">         
-           <div id="leelen-listview">
-              <ListView
-                ref={el => this.lv = el}
-                style={{height:this.props.viewSize.scrollContainterHeight }}
-                initialListSize={ 500 }
-                dataSource={ this.state.dataSource.cloneWithRowsAndSections( !!this.props.data ? this.props.data : []) }
-                renderRow={ (rowData,rowId,sectionId)=>this._renderRow(rowData,rowId,sectionId)}
-                renderSeparator={
-                    (sectionID, rowID, adjacentRowHighlighted)=>(
-                        <div key={rowID}></div>
-                    )
-                }
-                renderHeader={() => <span></span>}
-                onScroll ={(e)=>this.onScroll(e)}
-              />
-           </div>
+           <WingBlank size="ls">    
+           <Transition timeout={3000}>  
+                <div id="leelen-listview">
+                    <ListView
+                        ref={el => this.lv = el}
+                        style={{ height:this.props.viewSize.scrollContainterHeight,transition:"opacity 1000ms ease-in-out" }}
+                        initialListSize={ 500 }
+                        dataSource={ this.state.dataSource.cloneWithRowsAndSections( !!this.props.data ? this.props.data : []) }
+                        renderRow={ (rowData,rowId,sectionId)=>this._renderRow(rowData,rowId,sectionId)}
+                        renderSeparator={
+                            (sectionID, rowID, adjacentRowHighlighted)=>(
+                                <div key={rowID}></div>
+                            )
+                        }
+                        renderHeader={() => <span></span>}
+                        onScroll ={(e)=>this.onScroll(e)}
+                    />
+                </div>
+           </Transition >      
            </WingBlank>  
       </div>
     );

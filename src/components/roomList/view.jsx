@@ -2,8 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-import { fetchRoomInfo } from './actions'
-import { Table,Spin,Modal,Popover ,Icon,Button  } from 'antd';
+import { fetchRoomInfo,SetRoomStatus } from './actions'
+import { Table,Spin,Modal,Popover ,Icon,Button,Switch  } from 'antd';
 import { Error } from '../shared'
 import { getQueryString } from '../../tools/baseTools'
 import './style.less'
@@ -23,9 +23,22 @@ class Project extends React.Component {
             { title: '房间代码',dataIndex: 'Code',key: 'Code',className:"Code"}, 
             { title: '房间号', dataIndex: 'Name', key: 'Name',}, 
             { title: '业主姓名',dataIndex: 'ResidentName',key: 'ResidentName' }, 
-            { title: '电话',dataIndex: 'ResidentPhone',key: 'ResidentPhone'}, 
-            { title: '是否启用', dataIndex: 'Status', key: 'Status',render: ( text,record) =>{
-                return record.Status === 1 ? "已启用" :"未启用" 
+            { title: '业主性别',dataIndex: 'Gender',key: 'Gender' },
+            { title: '电话',dataIndex: 'ResidentPhone',key: 'ResidentPhone'},
+            { title: '是否启用', dataIndex: 'Status', key: 'Status',render: ( text,record,index) =>{
+                return (
+                    <div>
+                        <Switch checkedChildren={<Icon type="check" />}
+                                unCheckedChildren={<Icon type="cross" />}
+                                defaultChecked ={ !!Number( record.Status ) }
+                                checked = { !!Number( record.Status) }
+                                onChange = { ( checked ) => {
+                                    this.props.SetRoomStatus( record.ID, Number( checked ),index );
+                                }}>
+
+                        </Switch>
+                    </div>
+                )
             }},
             {
                 title:"成员",dataIndex:"customers",key:"customers",render:( text,record ) =>{
@@ -52,7 +65,8 @@ class Project extends React.Component {
                                         code:record.Code,
                                         name : record.Name,
                                         residentName:record.ResidentName,
-                                        residentPhone:record.ResidentPhone
+                                        residentPhone:record.ResidentPhone,
+                                        residentGender:record.Gender=="男"?"1":"2",
                                         }
                                     }
                             }><Icon type="edit" style={{ fontSize: 16, color: '#08c' }}/></Link>
@@ -95,9 +109,9 @@ class Project extends React.Component {
     }
     render(){
         let { status ,data} = this.props;
-
+        let {enableStatus,forbidden} =this.props.switch;
         //成员列表信息
-        let { customersModal } = this.state;    
+        let { customersModal } = this.state;
         customersModal.data.map( item =>{
              if( item.BindingStatus){
                 item.BindingStatus = '已开通'
@@ -109,12 +123,20 @@ class Project extends React.Component {
         })
         let renderContent;
         if(status === 'success'){
-            renderContent = (  
-                                <div id="room-table" className="lee-table">
-                                    <Table  columns={this.roomColumns} 
-                                        dataSource={data} 
-                                        pagination = {  data.length > 10 } />
-                                </div>
+            renderContent = (
+                <Spin size="large"
+                      tip={ <div id="lee-switch-spin-title"><Icon type="ellipsis" spin={true}/>  <span>{`正在为您${ !!forbidden ? "启用" : "禁用" }房间...`} </span></div> }
+                      spinning={  enableStatus === 'loading' }
+                    /* status === 'loading' */
+                      wrapperClassName="lee-switch-spin"
+                >{
+                    <div id="room-table" className="lee-table">
+                        <Table columns={this.roomColumns}
+                               dataSource={data}
+                               pagination={data.length > 10}/>
+                    </div>
+                }
+                </Spin>
                              )
            }else if( status === 'failure'){
             renderContent=( <Error onClick={ () => this.props.fetchRoomInfo()}/> )
@@ -172,12 +194,16 @@ const mapStateToProps = (state) => {
      return{
           status: room.status,
           data:  room.Data,
+          switch:state.room.switch,
      }
 }
 const mapDispatchToProps = (dispatch) => ({
     fetchRoomInfo: ( buildingID ) => {
      dispatch( fetchRoomInfo( buildingID));
-  }
+  },
+    SetRoomStatus : (buildingID, b,index ) =>{
+        dispatch( SetRoomStatus(buildingID,b,index) );
+    },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Project);

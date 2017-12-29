@@ -119,7 +119,7 @@ class CreateRoomModal extends React.Component {
                                 {transform:(transformedValue) =>{
                                     return transformedValue;
                                 }},
-                                {required:true,message:"房间代码不能为空"},
+                                {required:true,message:"房间名称不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
                                 {max:15,message:"最多只能包含15个字符"}
                                 ]
@@ -129,18 +129,18 @@ class CreateRoomModal extends React.Component {
                             placeholder="房间名称"/>)
                         }
                     </FormItem>
-                    <FormItem {...formItemLayout} label="业主名称">
+                    <FormItem {...formItemLayout} label="业主姓名">
                         {
                         getFieldDecorator('residentName',{
                             rules:[
-                                {required:true,message:"业主名称不能为空"},
+                                {required:true,message:"业主姓名不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
                                 {max:10,message:"最多只能包含10个字符"}
                                 ]
                         })(
                         <Input
                             type="text"
-                            placeholder="业主名称"/>)
+                            placeholder="业主姓名"/>)
                         }
                     </FormItem>
                     <FormItem {...formItemLayout} label="业主电话">

@@ -1,8 +1,7 @@
 //action对象
 import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE} from './actionTypes.js';
 import { ADD_ROOM,EDIT_ROOM } from './actionTypes.js';
-
-
+import {CHANGE_STATUS_STARTED,CHANGE_STATUS_SUCCESS, CHANGE_STATUS_FAILURE} from './actionTypes'
 //根据楼栋ID获取房间信息
 export const fetchRoomInfo = ( buildingID) =>{
     const apiUrl = `/api/room/v1/get?buildingId=${buildingID}`;
@@ -34,6 +33,7 @@ export const fetchRoomInfo = ( buildingID) =>{
 
 //新增房间
 export const AddNewRoomToList = (roomId,code,name,residentName,tel,gender) =>{
+    console.log(gender)
     return{
         type:ADD_ROOM,
         ID:roomId,
@@ -41,7 +41,7 @@ export const AddNewRoomToList = (roomId,code,name,residentName,tel,gender) =>{
         Name:name,
         ResidentName:residentName,
         ResidentPhone:tel,
-        gender:gender 
+        Gender:gender==1?"男":"女"
     }
 }
 
@@ -52,4 +52,22 @@ export const editRoomData = ({...argument}) =>{
      type:EDIT_ROOM,
      ...argument
   })
+}
+//启用or禁用房间
+export const SetRoomStatus = ( buildingID ,status,index ) =>{
+console.log(buildingID,status,index)
+    const apiUrl = `/api/room/v1/setenable?roomId=${buildingID}&status=${status}`;
+    return {
+        promise:fetch(apiUrl, {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }),
+        types: [CHANGE_STATUS_STARTED, CHANGE_STATUS_SUCCESS, CHANGE_STATUS_FAILURE],
+        buildingID:buildingID,
+        index:index,
+        status:status
+    }
 }

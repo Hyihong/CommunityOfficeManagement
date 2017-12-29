@@ -2,8 +2,8 @@ import { EDIT_ROOM_START, EDIT_ROOM_SUCCESS,EDIT_ROOM_FAILURE} from './actionTyp
 
 
 
- //编辑房间(房间ID,房间代码，房间名字，业主名字，业主电话)
-export const postEditForm = ( roomId,buildingID,code, name ,residentName,residentPhone) =>{
+ //编辑房间(房间ID,房间代码，房间名字，业主名字，业主电话，业主性别)
+export const postEditForm = ( roomId,buildingID,code, name ,residentName,residentPhone,residentGender) =>{
     const apiUrl = `/api/room/v1/edit`;
     return {
         promise:fetch(apiUrl, {
@@ -20,6 +20,7 @@ export const postEditForm = ( roomId,buildingID,code, name ,residentName,residen
                 residentName:residentName,
                 residentPhone:residentPhone,
                 status:"1",
+                residentGender:residentGender
             })
         }),
         types: [EDIT_ROOM_START, EDIT_ROOM_SUCCESS,EDIT_ROOM_FAILURE],
