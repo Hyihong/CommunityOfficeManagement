@@ -1,13 +1,13 @@
 #leelen-buidling-listview{
+    transition: opacity 300ms;
     .list-view-section-body{
-        transition: border 3s;
+        transition: all 3s;
     }
     .build-item{
         box-shadow:2px 3px 2px rgba(107, 106, 106, 0.3);
         padding:8px 0 8px 18px;
         margin-bottom: 15px;
         background:rgba(255,255,255,1);
-        //transition: all 300ms;
         &.enable{
             //background:rgba(255,255,255,0.8);
         }
@@ -33,14 +33,13 @@
             flex:0 0 22%;
             height:100%;
             div.image{
-                transition-duration: 300ms;
+                transition-duration: 200ms;
                 width:70px;
                 height:70px;
                 margin-left:10px;
                 border-radius:50%;
                 background:rgba(141, 170, 206,0.2)  -35% -30% url("../../assets/images_m/building_1.png") no-repeat;
                 background-size:150% auto;
-                //background-position: 10px 0px;
                 background-origin: 50% 50%;
                 
             }

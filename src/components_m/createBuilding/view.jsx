@@ -3,10 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postCreateBuildingForm } from './actions'
 import { actions as buildingListAction} from "../buildingList"
-import { Flex,Toast,InputItem, List,WhiteSpace  } from 'antd-mobile';
+import { Toast,InputItem, List,WhiteSpace  } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { withRouter } from 'react-router-dom'
 import { fetchProjectBuildings } from '../buildingList/actions'
+import QueueAnim from 'rc-queue-anim';
 
 import './style.less'
 import img_building from "../../assets/images_m/building_2.png"
@@ -68,11 +69,12 @@ class CreateBuilding extends React.Component {
                   <TopNav home title="新增楼栋"  check onCheckClick={ this.onSubmit }></TopNav>
                   <WhiteSpace></WhiteSpace> 
                     <div style={{textAlign:"center",margin:"30px 0"}}>
-                       <img src={ img_building } alt="" style={{width:"40%"}}/>
+                       <img src={ img_building } alt="" style={{width:"40%",heighe:"100px"}}/>
                     </div>
                   <div className="leelen-create-building">
                     <List>  
-                            <div className="leelen-input-section">
+                            <QueueAnim delay={0} className="queue-simple">
+                            <div className="leelen-input-section" key="1">
                                 <p className="tip">楼栋代码</p>
                                 <InputItem 
                                     {...getFieldProps('bdCode',{
@@ -83,7 +85,7 @@ class CreateBuilding extends React.Component {
                                 </InputItem>
                             </div>
                             <WhiteSpace></WhiteSpace>
-                            <div className="leelen-input-section">
+                            <div className="leelen-input-section" key="2">
                                 <p className="tip">楼栋名称</p>
                                 <InputItem 
                                     {...getFieldProps('bdName',{
@@ -93,6 +95,7 @@ class CreateBuilding extends React.Component {
                                     >
                                 </InputItem>
                             </div>
+                            </QueueAnim>
                         </List> 
                   </div>
              </div>

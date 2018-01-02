@@ -5,7 +5,8 @@ import { Link,withRouter,Prompt   } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import { fetchProjectBuildings , SetBuildingStatus ,saveViewSize} from './actions'
 import { Flex,ListView,WingBlank,Steps,Toast  } from 'antd-mobile';
-
+import QueueAnim from 'rc-queue-anim';
+import Animate from 'rc-animate';
 import TopNav from '../shared/views/TopNav'
 import { view as Search } from '../search'
 import { getQueryString } from '../../tools/baseTools'
@@ -29,6 +30,7 @@ class Project extends React.Component {
             dataSoure:ds,
             showSearch:'none',
             isListViewShow:1,
+            listView:"",
             searchList:[],
             id:getQueryString( this.props.location.search,'ID' ),
           };
@@ -49,9 +51,8 @@ class Project extends React.Component {
     }
     
     componentDidMount(){ 
-        
          //设置列表滚动高度
-            const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
+            const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this._lv).parentNode.offsetTop;
             this.props.saveViewSize({
                 scrollContainterHeight : hei
             })
@@ -59,12 +60,17 @@ class Project extends React.Component {
          //判断刷新
          if( this.props.history.action.toLowerCase() === 'pop' && !!this.props.bdData ){
              this.scrollPosition = this.props.viewSize.scrollPosition;
-             this.lv.scrollTo(0,this.props.viewSize.scrollPosition);
+             setTimeout( ()=>{
+                 this.lv.scrollTo(0,this.props.viewSize.scrollPosition);
+             },100)
              return;
          }else{
              //通过项目ID获取楼栋信息
-            const projectID = getQueryString( this.props.location.search,'ID' ); 
-            this.props.fetchProjectBuildings( projectID );
+             setTimeout( ()=>{
+                const projectID = getQueryString( this.props.location.search,'ID' ); 
+                this.props.fetchProjectBuildings( projectID );
+             },0)
+
          }
         
     }
@@ -125,45 +131,50 @@ class Project extends React.Component {
 
     _renderRow=(rowData,rowId,sectionId)=>{
          return(
-             <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`} >
-                <Flex>
-                    <Flex.Item>
-                        <div style={{textAlign:"left",marginRight:"20px",color:"#999",fontSize:"12px"}}>楼栋代码：{ rowData.Code}</div> 
-                    </Flex.Item>
-                    <Flex.Item>
-                        <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/roomList",search:`?id=${rowData.ID}` }}><span className="tag">房间详情</span></Link></div> 
-                    </Flex.Item>
-                </Flex>
-                <Flex>
-                    <Flex.Item className="prefix">
-                        <div className="image"></div>
-                    </Flex.Item>
-                    <Flex.Item className="content-wrapper">
-                          <div className ="head" style={{}}>
-                          <Link to= {{
-                              pathname:"/home/editBuilding",search:`?id=${rowData.ID}` ,
-                              state: { 
-                                buildingID: rowData.ID ,
-                                code:rowData.Code,
-                                name : rowData.Name,
-                                projectID:  getQueryString( this.props.location.search,'ID' )
-                                }
-                            }}><icon className="fa fa-edit" style={{fontSize:"16px",lineHeight:"16px",marginRight:"5px"}}></icon></Link>
-                          <b>{ rowData.Name }</b>
-                          </div>
-                            <Steps size="samll" className="edit-progress" >
-                                <Step  status="finish" icon={<icon className="fa fa-circle" />} title={`创建者： ${rowData.CreateInfo.Creator}`} description={rowData.CreateInfo.Created}/>
-                                <Step  status="finish" icon={<icon className="fa fa-circle" />} title={`更新者： ${rowData.ModifyInfo.Modifier}`} description={rowData.ModifyInfo.Modified}/>
-                            </Steps>
-
-                    </Flex.Item>
-                    <Flex.Item className="switch">
-                         <div className="switch-btn" onClick={ ()=> this.props.SetBuildingStatus(rowData.ID,Number(!rowData.Status),rowId) }>{ rowData.Status ? '禁用':'启用'}</div>
-                    </Flex.Item>
-                </Flex>
-             </div>
+             <Animate 
+             transitionName="fade"
+             transitionAppear>
+                            <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`}>
+                            <Flex>
+                                <Flex.Item>
+                                    <div style={{textAlign:"left",marginRight:"20px",color:"#999",fontSize:"12px"}}>楼栋代码：{ rowData.Code}</div> 
+                                </Flex.Item>
+                                <Flex.Item>
+                                    <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/roomList",search:`?id=${rowData.ID}` }}><span className="tag">房间详情</span></Link></div> 
+                                </Flex.Item>
+                            </Flex>
+                            <Flex>
+                                <Flex.Item className="prefix">
+                                    <div className="image"></div>
+                                </Flex.Item>
+                                <Flex.Item className="content-wrapper">
+                                      <div className ="head" style={{}}>
+                                      <Link to= {{
+                                          pathname:"/home/editBuilding",search:`?id=${rowData.ID}` ,
+                                          state: { 
+                                            buildingID: rowData.ID ,
+                                            code:rowData.Code,
+                                            name : rowData.Name,
+                                            projectID:  getQueryString( this.props.location.search,'ID' )
+                                            }
+                                        }}><icon className="fa fa-edit" style={{fontSize:"16px",lineHeight:"16px",marginRight:"5px"}}></icon></Link>
+                                      <b>{ rowData.Name }</b>
+                                      </div>
+                                        <Steps size="samll" className="edit-progress" >
+                                            <Step  status="finish" icon={<icon className="fa fa-circle" />} title={`创建者： ${rowData.CreateInfo.Creator}`} description={rowData.CreateInfo.Created}/>
+                                            <Step  status="finish" icon={<icon className="fa fa-circle" />} title={`更新者： ${rowData.ModifyInfo.Modifier}`} description={rowData.ModifyInfo.Modified}/>
+                                        </Steps>
+            
+                                </Flex.Item>
+                                <Flex.Item className="switch">
+                                     <div className="switch-btn" onClick={ ()=> this.props.SetBuildingStatus(rowData.ID,Number(!rowData.Status),rowId) }>{ rowData.Status ? '禁用':'启用'}</div>
+                                </Flex.Item>
+                            </Flex>
+                         </div>
+             </Animate>
          )
     }
+
 
     render(){
        let dataSource = [] ;
@@ -181,7 +192,7 @@ class Project extends React.Component {
        }else{
            dataSource = this.props.bdData;
        }
-      
+  
         return(
             <div>
                 {/* 搜索 */}
@@ -194,11 +205,13 @@ class Project extends React.Component {
                 {/* 顶部导航 */}
                 <TopNav home search onSearchClick = { this.onSearchClick } ></TopNav>  
                 {/* 列表 */}
-                <div id="leelen-buidling-listview" style={{opacity:this.state.isListViewShow}}>
+                <ListView ref={el => this._lv = el} initialListSize={ 0 } dataSource={  this.state.dataSoure.cloneWithRowsAndSections([] ) }  renderRow={ (rowData,rowId,sectionId)=>this._renderRow(rowData,rowId,sectionId)}/>
+                <QueueAnim >   
+                <div id="leelen-buidling-listview" style={{opacity:this.state.isListViewShow}} key="1">
                     <WingBlank size="ls">  
                         <ListView
                             ref={el => this.lv = el}
-                            initialListSize={ !!this.props.viewSize.scrollPosition ? this.props.viewSize.scrollPosition / 180 + 5: 10}
+                            initialListSize={ !!this.props.viewSize.scrollPosition ? this.props.viewSize.scrollPosition / 180 + 5: 10 }
                             style={{height:this.props.viewSize.scrollContainterHeight }}
                             dataSource={ 
                                     this.state.dataSoure.cloneWithRowsAndSections( !!dataSource ? dataSource :[] ) 
@@ -210,17 +223,19 @@ class Project extends React.Component {
                                 )
                             }
                             onScroll ={(e)=>this.onScroll(e)}
+                            scrollRenderAheadDistance ={600}
                             renderHeader={() => <span style={{color:"#fff"}}>{ !!search? "搜索结果":"楼栋列表" }(共{ !!dataSource ? dataSource.length:"0"}条数据)</span>}
                         />
                     </WingBlank> 
-                <Prompt when ={ true } message={(location)=>{
-                    //通过Prompt,作为onLeave钩子
-                    this.props.saveViewSize({
-                        scrollPosition : this.scrollPosition
-                    })
-                    return null;
-                }}></Prompt>   
                 </div>
+                </QueueAnim>  
+                <Prompt when ={ true } message={(location)=>{
+                        //通过Prompt,作为onLeave钩子
+                        this.props.saveViewSize({
+                            scrollPosition : this.scrollPosition
+                        })
+                        return null;
+                    }}></Prompt>   
                 {/* 新增按钮 */}
                 <span className="leelen-add-btn">
                     <Link to={ { pathname:"/home/createBuilding",search: `?id=${getQueryString( this.props.location.search,'ID' )}`,state:{projectID:getQueryString( this.props.location.search,'ID' )}} }>
