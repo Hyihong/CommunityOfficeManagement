@@ -4,28 +4,40 @@ import { List,WhiteSpace,SearchBar,WingBlank} from 'antd-mobile'
 
 import './style.less'
 const searchPanelStyle={
+    position:"fixed",
+    width:"100%",
+    height:"100%",
+    top:0,
+    bottom:0,
+    background:"#fff",
+    zIndex:10,
+    opacity:0.4
+}
+const searchBarStyle={
     position:"absolute",
+    top:0,
     width:"100%",
     height:"44px",
-    top:"0%",
-    background:"#fff",
-    zIndex:10
-
+    opacity:1,
+    zIndex:12
 }
-
-//编辑楼栋View
+//搜索框View
 class Search extends React.Component {
     constructor(props){
          super(props)
     }
     componentDidMount(){
         this.height = document.documentElement.clientHeight - 80;
-        
     }
     componentDidUpdate(){
-        //this.autoFocusInst.focus();
+        if( this.props.focus ){
+            this.autoFocusInst.focus();
+        }
+        
     }
-
+    onFocus =()=>{
+        this.props.onFocus();
+    }
     onSubmit =(value)=>{
         if( value ==='' || value===null){
             return;
@@ -40,25 +52,29 @@ class Search extends React.Component {
     }
    
     render(){
+        let maskStyle={ }
+        if( !this.props.hasListViewMask ){
+            maskStyle={
+                display:"none"
+            }
+        }
         return(
-             <div style={{ ...searchPanelStyle, ...this.props.style}}>
-                    <SearchBar 
-                        placeholder= { this.props.placeholder} 
-                        ref={ ref => this.autoFocusInst = ref}
-                        showCancelButton
-                        onCancel={ this.props.onCancel }
-                        onSubmit={ this.onSubmit}
-                        clear={false}
-                        maxLength= { 15 }
-                        onChange={ this.onSearchChange }
-                     ></SearchBar>  
-                     <WhiteSpace/>
-                     <WingBlank size="ls"> 
-                     </WingBlank> 
-                       
-                    
-                     
+             <div className="wrapper" style={{ ...this.props.style }} >
+                <div style={{ ...searchPanelStyle,...maskStyle }}></div>
+                <SearchBar 
+                    style={{...searchBarStyle}}
+                    placeholder= { this.props.placeholder} 
+                    ref={ ref => this.autoFocusInst = ref}
+                    showCancelButton
+                    onCancel={ this.props.onCancel }
+                    onSubmit={ this.onSubmit}
+                    onFocus = { this.onFocus }
+                    clear={false}
+                    maxLength= { 15 }
+                    onChange={ this.onSearchChange }
+                ></SearchBar>  
              </div>
+             
           
         )
     }

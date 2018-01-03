@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link,withRouter,Prompt   } from 'react-router-dom'
 import ReactDOM from 'react-dom';
 import { fetchProjectBuildings , SetBuildingStatus ,saveViewSize} from './actions'
-import { Flex,ListView,WingBlank,Steps,Toast  } from 'antd-mobile';
+import { Flex,ListView,WingBlank,Steps,Toast,WhiteSpace  } from 'antd-mobile';
 import QueueAnim from 'rc-queue-anim';
 import Animate from 'rc-animate';
 import TopNav from '../shared/views/TopNav'
@@ -28,11 +28,17 @@ class Project extends React.Component {
     
           this.state = {
             dataSoure:ds,
-            showSearch:'none',
-            isListViewShow:1,
+            //data
             listView:"",
             searchList:[],
             id:getQueryString( this.props.location.search,'ID' ),
+
+            //view
+            showSearch:'none',
+            isListViewShow:1,
+            isListViewBlur:0,
+            hasListViewMask:1,
+            isSearchFocus:0
           };
     }
 
@@ -52,7 +58,8 @@ class Project extends React.Component {
     
     componentDidMount(){ 
          //设置列表滚动高度
-            const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this._lv).parentNode.offsetTop;
+            //const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this._lv).offsetTop;
+            const hei = document.documentElement.clientHeight - this._listViewOccupy.offsetTop;
             this.props.saveViewSize({
                 scrollContainterHeight : hei
             })
@@ -82,23 +89,36 @@ class Project extends React.Component {
     onSearchClick =()=>{
         this.setState({
             showSearch:'block',
-            
+            isListViewBlur:1,
+            isSearchFocus:1,
         })
     }
 
     onSearchCancel =()=>{
         this.setState({
             showSearch:'none',
+            isListViewBlur:0
         })
         if( !!getQueryString( decodeURI( this.props.location.search),'SEARCH' ) ){
             this.props.history.goBack();
         }
+        this.lv.scrollTo(0,0);
+    }
+
+    onSearchFocus =()=>{
+        this.setState({
+            isListViewBlur:1,
+            hasListViewMask:1
+        })
     }
 
     onSearchSubmit=(value)=>{
         this.isOnSearch = true;
         this.setState({
-            isListViewShow:0
+            isListViewShow:0,
+            isListViewBlur:0,
+            isSearchFocus:0,
+            hasListViewMask:0
         })
         Toast.loading('正在搜索...', 0.8,()=>this.setState({
             isListViewShow:1
@@ -131,9 +151,7 @@ class Project extends React.Component {
 
     _renderRow=(rowData,rowId,sectionId)=>{
          return(
-             <Animate 
-             transitionName="fade"
-             transitionAppear>
+             <Animate   transitionName="fade" transitionAppear>
                             <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`}>
                             <Flex>
                                 <Flex.Item>
@@ -196,18 +214,22 @@ class Project extends React.Component {
         return(
             <div>
                 {/* 搜索 */}
-                <Search style={{display:this.state.showSearch}} onCancel={ this.onSearchCancel } 
+                <Search  style={{display:this.state.showSearch}} 
+                         hasListViewMask={this.state.hasListViewMask}
+                         onCancel={ this.onSearchCancel } 
                          onSubmit={this.onSearchSubmit} 
                          onChange ={ this.onSearchChange }
+                         onFocus = { this.onSearchFocus }
                          placeholder ="搜索楼栋代码或楼栋名称"
                          searchList = {this.state.searchList}
+                         focus ={ this.state.isSearchFocus }
                 ></Search>
                 {/* 顶部导航 */}
-                <TopNav home search onSearchClick = { this.onSearchClick } ></TopNav>  
+                <TopNav home search onSearchClick = { this.onSearchClick } ></TopNav> 
                 {/* 列表 */}
-                <ListView ref={el => this._lv = el} initialListSize={ 0 } dataSource={  this.state.dataSoure.cloneWithRowsAndSections([] ) }  renderRow={ (rowData,rowId,sectionId)=>this._renderRow(rowData,rowId,sectionId)}/>
+                <div ref ={el => this._listViewOccupy = el}></div>
                 <QueueAnim >   
-                <div id="leelen-buidling-listview" style={{opacity:this.state.isListViewShow}} key="1">
+                <div id="leelen-buidling-listview" style={{opacity:this.state.isListViewShow}} key="1" className={ this.state.isListViewBlur ? "blur":"" }>
                     <WingBlank size="ls">  
                         <ListView
                             ref={el => this.lv = el}

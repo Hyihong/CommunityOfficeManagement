@@ -7,9 +7,7 @@ import { Link ,withRouter } from 'react-router-dom'
 
 
  class Container  extends React.Component{
-
       render(){
-      
         return(
            <Flex className="top-nav" style={{...this.props.style}}>
                   <Flex.Item className="back-guide">
