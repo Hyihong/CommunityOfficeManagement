@@ -259,11 +259,12 @@ class Project extends React.Component {
                         return null;
                     }}></Prompt>   
                 {/* 新增按钮 */}
-                <span className="leelen-add-btn">
+                { !!search ?   null : <span className="leelen-add-btn">
                     <Link to={ { pathname:"/home/createBuilding",search: `?id=${getQueryString( this.props.location.search,'ID' )}`,state:{projectID:getQueryString( this.props.location.search,'ID' )}} }>
                         <icon className="fa fa-plus" style={{color:"#fff"}}></icon>
                     </Link>
-                </span>
+                </span>}
+                
             </div>
         )
     }
