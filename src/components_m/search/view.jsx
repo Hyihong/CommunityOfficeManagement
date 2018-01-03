@@ -15,7 +15,6 @@ const searchPanelStyle={
 }
 const searchBarStyle={
     position:"absolute",
-    top:0,
     width:"100%",
     height:"44px",
     opacity:1,
@@ -25,9 +24,38 @@ const searchBarStyle={
 class Search extends React.Component {
     constructor(props){
          super(props)
+         this.state= {
+             display:"none",
+             left:"-100%",
+             opacity:0
+         }
     }
     componentDidMount(){
         this.height = document.documentElement.clientHeight - 80;
+    }
+
+    componentWillReceiveProps(nextProps){
+        let {display} = nextProps.style ;
+        if( display !== this.props.style.display){
+            if(display === 'block' ){
+                this.setState({
+                    display:"block"
+                })
+                setTimeout( ()=>{
+                    this.setState({
+                        left:0,
+                        opacity:1
+                    })
+                })
+            }else{
+                this.setState({
+                    display:"none",
+                    left:'-100%',
+                    opacity:0
+                })
+            }
+        }
+       
     }
     componentDidUpdate(){
         if( this.props.focus ){
@@ -59,10 +87,10 @@ class Search extends React.Component {
             }
         }
         return(
-             <div className="wrapper" style={{ ...this.props.style }} >
+             <div className="wrapper" style={{ display:this.state.display}}>
                 <div style={{ ...searchPanelStyle,...maskStyle }}></div>
                 <SearchBar 
-                    style={{...searchBarStyle}}
+                    style={{...searchBarStyle,left: this.state.left,opacity:this.state.opacity}}
                     placeholder= { this.props.placeholder} 
                     ref={ ref => this.autoFocusInst = ref}
                     showCancelButton

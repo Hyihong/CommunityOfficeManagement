@@ -48,14 +48,17 @@ function parseAddress( ad ){
          _detail = ad.replace(`${adArr[0]}￥￥`,"");
     }else{
         _city = [];
-        _detail = ad;
+        _detail = !!ad ? ad :"";
     }
     return [_city,_detail]  
 }
 //生成城市数组
 function cityToArray( st ) {
+    if( typeof st  !== 'string'){
+        return [];
+    }
     let cityArr = [];
-    if(st!== undefined && st!== '' ){
+    if(st!== undefined && st!== ''){
          cityArr = st.match( /(\S.*?[省|区|市])(\S.*?[市|区|州|划|县])?(\S.*?[市|区|县])?/ ).filter( (city,idx) =>{
             return city !== undefined && idx !==0;
         });
@@ -166,7 +169,9 @@ render(){
      if( !!initialData  ){
          Object.keys(initialData).map((key)=>{
              if( key === 'Address' && !!initialData[key] ){
+
                  const adArr = parseAddress(initialData[key] );
+
                  _d['ad_city']= cityToArray( adArr[0] );
                  _d['ad_detail'] = adArr[1];
              }else{
@@ -174,6 +179,7 @@ render(){
              }
          })
      }
+
 return (
     <Spin tip="正在为您修改项目信息..."  size="large" spinning={false} >
     <Spin tip="数据加载中..."  size="large" spinning={ this.props.fetchData.status ==='loading' && this.props.orzAll.status === 'loading'} >
@@ -213,7 +219,7 @@ return (
                         message: '请选择组织机构',
                     }]
                 })(
-                    <Organizations orzOptions = { this.props.orzAll.Data}
+                    <Organizations orzOptions = { !!this.props.orzAll.Data ? JSON.parse( this.props.orzAll.Data ):[] }
                                    status = { this.props.orzAll.status}>
                     </Organizations>
                 )

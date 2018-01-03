@@ -25,8 +25,7 @@ class Organizations extends React.Component {
             options.push ( ...new mapOrganazitionsJson(  ( orzOptions ) ) ) ;
         }
         let isLoading = status === 'loading' ?  true : false ;
-        
-        //let isLoading = true;
+
         return (
             <div className="lee-organizations-cascader">
                 <Spin size="small"  tip="正在加载组织结构数据 ..." spinning={ isLoading }>  

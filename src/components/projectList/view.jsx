@@ -196,7 +196,7 @@ class List extends React.Component {
                                     <Organizations
                                         allOption={true}  //增加[全部]选项
                                         onChange={this.handleOrganizationChange}
-                                        orzOptions = { this.props.orzWithProject.Data}
+                                        orzOptions = { !!this.props.orzWithProject.Data ? JSON.parse(this.props.orzWithProject.Data ):[]}
                                         status = { this.props.orzWithProject.status}
                                         value={ this.props.orzWithProject.selectArr}
                                     ></Organizations>

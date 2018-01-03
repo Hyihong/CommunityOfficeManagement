@@ -165,7 +165,7 @@ return (
                         message: '请选择组织机构',
                     }]
                 })(
-                    <Organizations orzOptions = { this.props.orzAll.Data}
+                    <Organizations orzOptions = { !!this.props.orzAll.Data ? JSON.parse( this.props.orzAll.Data) :[]}
                                     status = { this.props.orzAll.status}>
                     </Organizations>
                 )

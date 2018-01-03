@@ -5,8 +5,9 @@ export default class mapOrganazitionsJson {
     constructor( data,isForMobile ) {
         this._options = []
         this.doMap( data ,this._options );
-        //解决移动版无法选择非叶子选项的问题
-        if(isForMobile === 'mobile' && true) {
+
+          //解决移动版无法选择非叶子选项的问题
+          if(isForMobile === 'mobile' && true) {
             this._options[0].children.unshift({label:"",value:""});
             this._options[0].children.map( item =>{
                 if( item.children !== undefined ){
@@ -25,7 +26,6 @@ export default class mapOrganazitionsJson {
     doMap( d , opt ){ 
         if(  isArray( d ) ){
              Object.keys( d ).map( item => {
-                    
                     if( d[item].ChildOrganizations.length > 0 ){
                         opt.push({　
                             value:d[item].id,
@@ -39,7 +39,6 @@ export default class mapOrganazitionsJson {
                             label:d[item].name,
                         })
                     }  
-
                     return null ;                 
              })
         }else{
