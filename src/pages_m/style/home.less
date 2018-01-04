@@ -2,12 +2,17 @@ body{
     //background:#fff;
 }
 .leelen-homeNav{
+    transition: transform 300ms ease-in-out;
     height:100px;
+    transform: skew(5deg,5deg) scale(0.8);
     h2,h4{
         color:#fff;
     }
     h2{margin-bottom:5px}
     h4{font-weight:normal;}
+    &:active{
+        transform: scale(1.2)
+    }
     &.project-list{
         background:url("../../assets/images_m/home_2.jpg") no-repeat;
         background-size:cover;

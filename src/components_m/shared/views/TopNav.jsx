@@ -11,12 +11,12 @@ import { Link ,withRouter } from 'react-router-dom'
         return(
            <Flex className="top-nav" style={{...this.props.style}}>
                   <Flex.Item className="back-guide">
-                      <icon className="fa fa-angle-left back" style={{fontSize:"34px",marginTop:"0px",color:"#1985ac"}} onClick ={ ()=>this.props.history.goBack()}/>
+                      <icon className="fa fa-angle-left back" style={{fontSize:"34px",marginTop:"0px",color:"#fff"}} onClick ={ ()=>this.props.history.goBack()}/>
                   </Flex.Item >
                    {
                      !!this.props.home ?  
                      <Flex.Item className="home-guide">
-                           <Link to="/home"><icon className="fa fa-home home" style={{fontSize:"22px",marginTop:"4px"}}/></Link>
+                           <Link to="/home"><icon className="fa fa-home home" style={{fontSize:"22px",marginTop:"4px",color:"#fff"}}/></Link>
                      </Flex.Item >  : null
                    }
                    {
