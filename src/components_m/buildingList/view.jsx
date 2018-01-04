@@ -150,8 +150,8 @@ class Project extends React.Component {
 
     _renderRow=(rowData,rowId,sectionId)=>{
          return(
-             <Animate   transitionName="fade" transitionAppear>
-                            <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`}>
+             <Animate  transitionName="fade" transitionAppear>
+                        <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`}>
                             <Flex>
                                 <Flex.Item>
                                     <div style={{textAlign:"left",marginRight:"20px",color:"#999",fontSize:"12px"}}>楼栋代码：{ rowData.Code}</div> 

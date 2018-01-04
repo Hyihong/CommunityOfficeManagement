@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { fetchAllProjects,wakeOperationPanel,saveViewSize } from './actions'
 import { Flex,ListView,Card,WhiteSpace,WingBlank,Grid,Toast   } from 'antd-mobile';
+import QueueAnim from 'rc-queue-anim';
+import Animate from 'rc-animate';
 import './style.less'
 import TopNav from '../shared/views/TopNav'
 import '../../assets/font-awesome-4.7.0/less/font-awesome.less'
@@ -58,13 +60,15 @@ class ProjectList extends React.Component {
    
    componentDidMount() {
         //设置列表滚动高度
-        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
+        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this._listViewOccupy).offsetTop;
         this.props.saveViewSize({
             scrollContainterHeight : hei
         })
         //判断刷新
         if( !!this.props.data ){
-            this.lv.scrollTo(0,this.props.viewSize.scrollPosition);
+            setTimeout( ()=>{
+                this.lv.scrollTo(0,this.props.viewSize.scrollPosition);
+            },100)
             return;
         }else{
             this.props.fetchAllProjects();
@@ -107,7 +111,7 @@ class ProjectList extends React.Component {
 
   _renderRow = (rowData, sectionID, rowID, highlightRow)=>{
     return(
-                <div>
+                <Animate   transitionName="fade" transitionAppear>
                     <div style={{display: this.isProjectListAuditing ? ( rowData.Status ? "none" :"block"): ( rowData.Status ? "block" :"none") }}>   
                         <Card full className={rowData.Status ? "audited" :"auditing"}>
                             <Card.Header
@@ -171,7 +175,7 @@ class ProjectList extends React.Component {
                                 </Card>
                     <WhiteSpace size="lg"/>        
                     </div>
-                </div>
+                </Animate>
             )
   }
 
@@ -179,8 +183,10 @@ class ProjectList extends React.Component {
     return (
       <div>
            <TopNav home title={ this.isProjectListAuditing ? "未审核项目列表":"已审核项目列表"}></TopNav>
+           <div ref={el => this._listViewOccupy = el}></div>
            <WingBlank size="ls">    
-                <div id="leelen-listview">
+            <QueueAnim>    
+                <div id="leelen-listview" key="1">
                     <ListView
                         ref={el => this.lv = el}
                         style={{ height:this.props.viewSize.scrollContainterHeight }}
@@ -196,6 +202,7 @@ class ProjectList extends React.Component {
                         onScroll ={(e)=>this.onScroll(e)}
                     />
                 </div>
+            </QueueAnim> 
            </WingBlank>  
       </div>
     );
