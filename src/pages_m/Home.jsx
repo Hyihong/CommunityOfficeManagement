@@ -16,7 +16,8 @@ class Home extends React.Component {
        document.title="首页"
        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.nav).offsetTop; 
        this.setState({
-          height:(hei)/3
+          height:(hei)/3,
+          transform:"scale(1)"
        })
    }
 
@@ -29,7 +30,7 @@ class Home extends React.Component {
                ref={el => this.nav = el}
           >
             <Link to="/home/projectList"> 
-                <div className="leelen-homeNav project-list" style={{height:this.state.height}}>
+                <div className="leelen-homeNav project-list" style={{height:this.state.height,transform:this.state.transform}}>
                     <div>
                       <h2>已审核项目</h2>
                       <h4>显示已审核项目详情</h4>
@@ -38,7 +39,7 @@ class Home extends React.Component {
                 </div>
             </Link> 
             <Link to="/home/projectListAuditing">
-                <div className="leelen-homeNav project-modify" style={{height:this.state.height}}>
+                <div className="leelen-homeNav project-modify" style={{height:this.state.height,transform:this.state.transform}}>
                     <div>
                       <h2>未审核项目</h2>
                       <h4>显示未审核项目详情</h4>
@@ -47,7 +48,7 @@ class Home extends React.Component {
                 </div>
             </Link> 
             <Link to="/home/apply">
-                <div className="leelen-homeNav project-apply" style={{height:this.state.height}}>
+                <div className="leelen-homeNav project-apply" style={{height:this.state.height,transform:this.state.transform}}>
                     <div>
                       <h2>项目申请</h2>
                       <h4>申请新的项目</h4>
