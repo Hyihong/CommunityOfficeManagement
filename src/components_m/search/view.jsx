@@ -26,7 +26,7 @@ class Search extends React.Component {
          super(props)
          this.state= {
              display:"none",
-             left:"-100%",
+             //left:"-100%",
              opacity:0
          }
     }
@@ -43,14 +43,14 @@ class Search extends React.Component {
                 })
                 setTimeout( ()=>{
                     this.setState({
-                        left:0,
+                        //left:0,
                         opacity:1
                     })
                 },100)
             }else{
                 this.setState({
                     display:"none",
-                    left:'-100%',
+                    //left:'-100%',
                     opacity:0
                 })
                 setTimeout( ()=>{

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter} from 'react-router-dom'
 import { createForm } from 'rc-form';
 import ReactDOM from 'react-dom';
+import Animate from 'rc-animate'
 import { Toast,InputItem, List,WhiteSpace,WingBlank,Checkbox,Picker,TextareaItem   } from 'antd-mobile';
 import { actions as OrzActions } from '../../components/organizations'
 import { actions as projectListActions } from '../projectList'
@@ -263,6 +264,7 @@ render(){
             <TopNav home title="项目修改"  check onCheckClick={ this.onSubmit }></TopNav>
             <div className="leelen-applyModify" style={{height:this.state.height,overflow:"auto"}}>
                 <WingBlank size="ls">   
+                <Animate  transitionName="fade" transitionAppear>
                 <List ref={el => this.lv = el} >
                     <h5>项目<span className="require">（必填）</span></h5>
                     <InputItem 
@@ -393,6 +395,7 @@ render(){
                     <WhiteSpace></WhiteSpace>
 
                 </List>  
+                </Animate>
                 </WingBlank>   
             </div>
         </div>

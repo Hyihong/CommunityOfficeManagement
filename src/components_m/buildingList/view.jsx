@@ -227,7 +227,7 @@ class Project extends React.Component {
                 <TopNav home search onSearchClick = { this.onSearchClick } ></TopNav> 
                 {/* 列表 */}
                 <div ref ={el => this._listViewOccupy = el}></div>
-                {/* <QueueAnim delay="0">    */}
+                <QueueAnim delay="0"> 
                 <div id="leelen-buidling-listview" style={{opacity:this.state.isListViewShow}} key="1" className={ this.state.isListViewBlur ? "blur":"" }>
                     <WingBlank size="ls">  
                         <ListView
@@ -249,7 +249,7 @@ class Project extends React.Component {
                         />
                     </WingBlank> 
                 </div>
-                {/* </QueueAnim>   */}
+                </QueueAnim>
                 <Prompt when ={ true } message={(location)=>{
                         //通过Prompt,作为onLeave钩子
                         this.props.saveViewSize({

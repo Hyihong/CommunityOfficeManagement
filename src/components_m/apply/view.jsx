@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom';
 import { Toast,InputItem, List,WhiteSpace,WingBlank,Checkbox,Picker,TextareaItem   } from 'antd-mobile';
 import { actions as OrzActions } from '../../components/organizations'
 import { actions as projectListActions } from '../projectList'
+import Animate from 'rc-animate';
 import { postApplyForm } from './actions'
 import TopNav from '../shared/views/TopNav'
 import mapOrganazitionsJson from "../../tools/mapOrganazitionsJson" 
@@ -204,7 +205,7 @@ render(){
             <TopNav home title="项目申请"  check onCheckClick={ this.onSubmit }></TopNav>
             <div className="leelen-apply" style={{height:this.state.height}}>
                 <WingBlank size="ls">   
-
+                <Animate  transitionName="fade" transitionAppear>
                 <List ref={el => this.lv = el} >
 
                     <h5>项目<span className="require">（必填）</span></h5>
@@ -302,6 +303,7 @@ render(){
                     <WhiteSpace></WhiteSpace>
 
                 </List>  
+                </Animate> 
                 </WingBlank>   
             </div>
         </div>
