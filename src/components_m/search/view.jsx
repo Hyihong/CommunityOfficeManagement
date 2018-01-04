@@ -39,20 +39,26 @@ class Search extends React.Component {
         if( display !== this.props.style.display){
             if(display === 'block' ){
                 this.setState({
-                    display:"block"
+                    display:"block",
                 })
                 setTimeout( ()=>{
                     this.setState({
                         left:0,
                         opacity:1
                     })
-                })
+                },100)
             }else{
                 this.setState({
                     display:"none",
                     left:'-100%',
                     opacity:0
                 })
+                setTimeout( ()=>{
+                    this.setState({
+                        display:"none"
+                    })
+                })
+                
             }
         }
        
@@ -87,8 +93,8 @@ class Search extends React.Component {
             }
         }
         return(
-             <div className="wrapper" style={{ display:this.state.display}}>
-                <div style={{ ...searchPanelStyle,...maskStyle }}></div>
+             <div className="wrapper" style={{display:this.state.display}}>
+                <div style={{ ...searchPanelStyle,...maskStyle, }}></div>
                 <SearchBar 
                     style={{...searchBarStyle,left: this.state.left,opacity:this.state.opacity}}
                     placeholder= { this.props.placeholder} 
