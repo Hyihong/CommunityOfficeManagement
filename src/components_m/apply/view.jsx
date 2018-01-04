@@ -83,7 +83,7 @@ componentWillMount(){
     }
 }
 componentDidMount(){
-        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop;
+        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.parentNode.offsetTop;
         this.setState({
             height:hei
         })
@@ -202,7 +202,7 @@ render(){
     return( 
         <div> 
             <TopNav home title="项目申请"  check onCheckClick={ this.onSubmit }></TopNav>
-            <div className="leelen-apply" style={{height:this.state.height,overflow:"auto"}}>
+            <div className="leelen-apply" style={{height:this.state.height}}>
                 <WingBlank size="ls">   
 
                 <List ref={el => this.lv = el} >
