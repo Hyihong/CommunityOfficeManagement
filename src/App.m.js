@@ -4,6 +4,7 @@ import { Bundle }from './components/functional'
 import './cover.m.less'
 
 import { view as ProjectList} from './components_m/projectList'
+import  ProjectDetail from './pages_m/ProjectDetail'
 import { view as BuildingList} from './components_m/buildingList'
 import { view as RoomList} from './components_m/roomList'
 import { view as SubRoom} from './components_m/subRoom'
@@ -38,6 +39,7 @@ class App extends React.Component{
                         {/* 项目管理 */}
                         <Route  exact path="/home/projectList" component={ProjectList} />
                         <Route  exact path="/home/projectListAuditing" component={ProjectList} />
+                        <Route  path="/home/projectDetail" component={ProjectDetail} />
                         {/* 楼栋管理 */}
                         <Route  exact path="/home/buildingList" component={BuildingList}/>
                         <Route  exact path="/home/editBuilding" component={editBuilding}/>

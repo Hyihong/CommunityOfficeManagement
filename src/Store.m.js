@@ -11,6 +11,8 @@ import { reducer as createRoomReducer } from './components_m/createRoom'
 import { reducer as applyReducer } from './components_m/apply'
 import { reducer as applyModify } from './components/applyModify'
 import { reducer as organizationsReducer } from './components/organizations'
+import { reducer as projectDetailReducer } from './components/projectDetail'
+
 
 
 
@@ -28,17 +30,21 @@ if (process.env.NODE_ENV !== 'production') {
 const originalReducers = {
     routing: routerReducer,
     projectList: projectsReducer,
+    projectDetail:projectDetailReducer,
+
     buildingList:buildingListReducer,
-    roomList:roomListReducer,
     editBuilding:editBuildingReducer,
-    editRoom:editRoomReducer,
     createBuilding:createBuildingReducer,
+
+    roomList:roomListReducer,
+    editRoom:editRoomReducer,
     createRoom:createRoomReducer,
 
     apply:applyReducer,
     applyModify:applyModify,
 
-    organizations:organizationsReducer
+    organizations:organizationsReducer,
+    
 }
 
 const reducer =  combineReducers(originalReducers)

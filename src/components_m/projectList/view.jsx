@@ -99,8 +99,7 @@ class ProjectList extends React.Component {
     switch(el.text){
         case '修改申请': this.props.history.push(`/home/applyModify?id=${proID}`);break;
         case '楼栋管理': this.props.history.push(`/home/buildingList?id=${proID}`);break;
-        case '更多信息': alert("开发中...");break;
-        // this.props.history.push(`/home/apply?id=${proID}`)
+        case '更多信息': this.props.history.push(`/home/projectDetail?id=${proID}`);break;
         default:;
     }
   }
