@@ -1,0 +1,64 @@
+.calling-number{
+    .am-flexbox{
+        text-align: center;
+        background:#fff;
+    }
+}
+
+.leelen-detail-list{
+    .leelen-detail-list-body{
+        padding-top:100px;
+    }
+    .am-flexbox{
+        border-bottom:1px solid #f7f7f7;
+        &.header{
+            position:fixed;
+            width:100%;
+            top:44px;
+            border-bottom:1px solid #474646;
+            .am-flexbox-item{
+                padding: 5px 10px;
+            }
+            .header-status{
+                text-align: left;
+                font-size:10px;
+                li{
+                    line-height: 1.2;
+                }
+                li span{
+                    float:left;
+                    margin-top:4px;
+                    padding:3px;
+                    background:red;
+                    margin-right:2px;
+                }
+            }
+        }
+        .am-flexbox-item{
+             padding: 10px;
+             &.status{
+                 margin-left:15px;
+                 padding: 0px;
+                 flex: 0 0 45px;
+                 font-size:10px;
+                 line-height: 1.2;
+                 color:#fff;
+                 >div{
+                     width:12px;
+                     height:12px;
+                     border-radius:50%;
+                 }
+                 .used{
+                     background:#47cf73;
+                 }
+                .not-use{
+                    background:#fe4800;
+                }
+                 .disable{
+                    background:#b7b9b8;
+                 }
+             }
+        }
+       
+    }
+}
