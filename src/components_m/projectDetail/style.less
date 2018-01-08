@@ -1,20 +1,15 @@
-.calling-number{
+.leelen-detail-list{
     .am-flexbox{
         text-align: center;
         background:#fff;
     }
-}
-
-.leelen-detail-list{
     .leelen-detail-list-body{
-        padding-top:100px;
+        overflow:auto;
+        -webkit-overflow-scrolling: touch; 
     }
     .am-flexbox{
         border-bottom:1px solid #f7f7f7;
         &.header{
-            position:fixed;
-            width:100%;
-            top:44px;
             border-bottom:1px solid #474646;
             .am-flexbox-item{
                 padding: 5px 10px;
@@ -59,6 +54,30 @@
                  }
              }
         }
-       
+    }
+
+    //设备列表
+    &.device{
+        .am-flexbox-item{
+            text-align: left;
+            &.status{
+                flex: 0 0 30px;
+            }
+            &.number{
+                flex:1 0 30%;
+            }
+            span{
+                font-size:9px;
+                padding:0 1px;
+                line-height: 1;
+                margin-right:3px;
+                color:#fff;
+                border:1px solid;
+                &.color-1{ border-color:#fb6878;color:#fb6878}
+                &.color-2{ border-color:#f3a93a;color:#f3a93a}
+                &.color-3{ border-color:#59baf1;color:#59baf1}
+                &.color-4{ border-color:#5aec4c;color:#5aec4c}
+            }
+        }
     }
 }

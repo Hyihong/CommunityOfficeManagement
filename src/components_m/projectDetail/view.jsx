@@ -16,27 +16,38 @@ class ProjectDetail extends React.Component {
         super();
         this.state={
             headerPosition:'static',
-            scrollTop:0
+            scrollTop:0,
+            listHeight:0
         }
      
     }
     componentDidMount(){ 
-        const that = this;
+        //判断页面
         this.category = this.props.location.pathname.split('/')[3] ;
-        window.onscroll = function(){
-            var t = document.documentElement.scrollTop || document.body.scrollTop;  //获取距离页面顶部的距离
-            // that.setState({
-            //     headerPosition: that.state.scrollTop > t ? 'static' :'fixed'
-            // })
-            // that.setState({scrollTop:t})
-            
-        }
-        //get listbody dom
+        
+        //set header style 
+        // window.onscroll = function(){
+        //     var t = document.documentElement.scrollTop || document.body.scrollTop;  //获取距离页面顶部的距离
+        //     that.setState({
+        //         headerPosition: that.state.scrollTop > t ? 'static' :'fixed'
+        //     })
+        //     that.setState({scrollTop:t})
+        // }
         
         // has fetch data 
         const projectID = getQueryString( this.props.location.search,'ID' ); 
+        const { data } = this.props;
+        if(!!data && data.projectID && data.projectID === projectID){
+            return;
+        }
         this.props.fetchProjectDetail( projectID );
-      
+    }
+    componentDidUpdate(nextProps){
+        //get list offset
+        if( this.state.listHeight === 0 && this.listbody ){
+            const hei = document.documentElement.clientHeight - this.listbody.offsetTop;
+            this.setState({listHeight:hei})
+        }
     }
 
     render(){
@@ -56,10 +67,10 @@ class ProjectDetail extends React.Component {
                                         <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>禁用</li>
                                     </ul>
                                 </Item>
-                                <Item>码号类型</Item>
-                                <Item>数量</Item>
+                                <Item><b>码号类型</b></Item>
+                                <Item><b>数量</b></Item>
                             </Flex>
-                            <div className="leelen-detail-list-body">
+                            <div className="leelen-detail-list-body" style={{height:this.state.listHeight}} ref={el => this.listbody = el }>
                                 { this.props.data.CallingNumberPool.map( record =>{
                                     return (
                                         <Flex key={record.key}>
@@ -78,21 +89,55 @@ class ProjectDetail extends React.Component {
                };
                break;
             case "device":
-                renderContent= (
-                    <div className="device">
-                        {/* <Flex className="header"><Item>数量</Item><Item>类型</Item></Flex>
-                        <Flex>
-                            <Item>数量</Item><Item>类型</Item><Item>状态</Item>
-                        </Flex> */}
-                    </div>);
-                break;
+            if( !!this.props.data  && this.props.data.Device ){
+                renderContent=  (
+                    <div>
+                        <div className="device leelen-detail-list">
+                            <Flex className="header">
+                                <Item style={{flex:"0 0 60px"}}>
+                                    <ul className="header-status">
+                                        <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>已用</li>
+                                        <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>未用</li>
+                                        <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>禁用</li>
+                                    </ul>
+                                </Item>
+                                <Item style={{flex:"1 0 30%"}}><b>系列号 | 电信码号</b></Item>
+                                <Item><b>类型 | 版本</b></Item>
+                            </Flex>
+                            <div className="leelen-detail-list-body" style={{height:this.state.listHeight}} ref={el => this.listbody = el }>
+                                { this.props.data.Device.map( record =>{
+                                    return (
+                                        <Flex key={record.key}>
+                                            <Item className="status">
+                                                    <div className={record.Status === 1 ? "not-use" :( record.Status === 2 ? "used" :"disable") }> </div>
+                                            </Item>
+                                            <Item className="number">
+                                                <div><span className="color-1">系</span>{ record.SerialNo}</div>
+                                                <div><span className="color-2">码</span>{ record.CallingNumberPool}</div>
+                                               
+                                            </Item>
+                                            <Item className="about"> 
+                                                <div><span className="color-3">类</span>{ record.DeviceType === 1 ? "围墙机" :( record.DeviceType === 2 ? "单元主机" :"室内分机") }</div>
+                                                <div><span className="color-4">版</span>{ record.Desc}</div>
+                                            </Item>
+                                        </Flex>
+                                    )
+                                } ) }
+                            </div>
+                        </div>
+                   </div>
+                   );
+            }
+            break;
             default: return null ;
 
         }
         return (
             <div>
-                <TopNav home title="电信码号" style={{position:"fixed",width:"100%"}}></TopNav>
-                { renderContent }
+                <TopNav home title="电信码号"></TopNav>
+                <Animate  transitionName="fade" transitionAppear>
+                    { renderContent }
+                </Animate>
             </div>
         )
       }

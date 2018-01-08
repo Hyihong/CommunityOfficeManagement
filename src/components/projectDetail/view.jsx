@@ -29,7 +29,7 @@ class ProjectDetail extends React.Component {
         this.deviceColumns = 
             [{ title: '系列号', dataIndex: 'SerialNo', key: 'SerialNo',}, 
             { title: '设备类型',dataIndex: 'DeviceType',key: 'DeviceType',render: ( text,record) =>{
-                return record.Status === 1 ? "围墙机" :( record.Status === 2 ? "单元主机" :"室内分机") 
+                return record.DeviceType === 1 ? "围墙机" :( record.DeviceType === 2 ? "单元主机" :"室内分机") 
             }},
             { title: '电信码号',dataIndex: 'CallingNumberPool',key: 'CallingNumberPool'},
             { title: '设备版本',dataIndex: 'Desc',key: 'Desc',}, 
