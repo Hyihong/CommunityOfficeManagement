@@ -14,6 +14,7 @@ import { view as createBuilding} from './components_m/createBuilding'
 import { view as createRoom} from './components_m/createRoom'
 import { view as Apply} from './components_m/apply'
 import { view as ApplyModify} from './components_m/applyModify'
+import About from './pages_m/About'
 
 //异步页面，代码分割，按需加载
 const Home = (props) => (
@@ -36,6 +37,7 @@ class App extends React.Component{
                     <Switch>
                         <Redirect exact from='/' to='/home' />
                         <Route  exact path="/home" component={Home} />
+                        <Route  exact path="/home/about" component={About} />
                         {/* 项目管理 */}
                         <Route  exact path="/home/projectList" component={ProjectList} />
                         <Route  exact path="/home/projectListAuditing" component={ProjectList} />
