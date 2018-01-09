@@ -25,7 +25,12 @@ class Home extends React.Component {
     return (
       <div>
          {/* <NoticeBar mode="closable">移动版正在开发中，尽请期待 ˃̶͈ᴗ˂̶͈ ...</NoticeBar>   */}
-          <div className="logo" style={{textAlign:"center",padding:"30px 0 20px 0",background:"#fff"}}><img src={ img_logo } alt="" style={{height:"30px"}}/></div>
+          <div className="logo" style={{textAlign:"center",padding:"30px 0 20px 0",background:"#fff"}}>
+             <img src={ img_logo } alt="" style={{height:"28px"}}/>
+             <span style={{marginLeft:"8px"}}>
+                  <Link to="/home/about"><icon className="fa fa-bars" style={{marginRight:"5px",fontSize:"20px"}}></icon></Link>
+             </span>
+          </div>
           <div className="home"  
                ref={el => this.nav = el}
           >
