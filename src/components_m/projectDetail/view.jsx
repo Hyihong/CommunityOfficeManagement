@@ -15,15 +15,14 @@ class ProjectDetail extends React.Component {
     constructor(){
         super();
         this.state={
-            headerPosition:'static',
-            scrollTop:0,
-            listHeight:0
+            listHeight:0,
+            category:''
         }
      
     }
     componentDidMount(){ 
         //判断页面
-        this.category = this.props.location.pathname.split('/')[3] ;
+        //this.category = this.props.location.pathname.split('/')[3] ;
         
         //set header style 
         // window.onscroll = function(){
@@ -33,14 +32,19 @@ class ProjectDetail extends React.Component {
         //     })
         //     that.setState({scrollTop:t})
         // }
-        
+
+        // page type
+        this.setState({
+            category:this.props.location.pathname.split('/')[3]
+        })
         // has fetch data 
         const projectID = getQueryString( this.props.location.search,'ID' ); 
         const { data } = this.props;
-        if(!!data && data.projectID && data.projectID === projectID){
+        if(!!data && data.ID && data.ID === projectID){
             return;
         }
         this.props.fetchProjectDetail( projectID );
+        
     }
     componentDidUpdate(nextProps){
         //get list offset
@@ -48,12 +52,14 @@ class ProjectDetail extends React.Component {
             const hei = document.documentElement.clientHeight - this.listbody.offsetTop;
             this.setState({listHeight:hei})
         }
+        this.category = this.props.location.pathname.split('/')[3] ;
+ 
     }
 
     render(){
         //加载状态
         let renderContent; 
-        switch ( this.category ){
+        switch ( this.state.category ){
             case "callingNumber":
                if( !!this.props.data  && this.props.data.CallingNumberPool ){
                 renderContent=  (
@@ -129,7 +135,7 @@ class ProjectDetail extends React.Component {
                    );
             }
             break;
-            default: return null ;
+            default: return <div>nothing</div> ;
 
         }
         return (
