@@ -66,13 +66,14 @@ class ProjectList extends React.Component {
         })
         //判断刷新
         if( !!this.props.data ){
-            setTimeout( ()=>{
-                this.lv.scrollTo(0,this.props.viewSize.scrollPosition);
-            },100)
+                setTimeout( ()=>{
+                    this.lv.scrollTo(0, this.props.history.action.toLowerCase() === 'push' ? 0: this.props.viewSize.scrollPosition);
+                },100)
             return;
         }else{
             this.props.fetchAllProjects();
         }
+        
   }
 
   shouldComponentUpdate(nextProps, nextState){
@@ -92,16 +93,18 @@ class ProjectList extends React.Component {
   }
 
   //点击宫格
-  operateBtnOnclick=(el,proID)=>{
+  operateBtnOnclick=(el,proID,sectionID)=>{
     this.props.saveViewSize({
         scrollPosition : this.scrollPosition
     })
+    this.props.wakeOperationPanel(sectionID,false);
     switch(el.text){
         case '修改申请': this.props.history.push(`/home/applyModify?id=${proID}`);break;
         case '楼栋管理': this.props.history.push(`/home/buildingList?id=${proID}`);break;
         case '更多信息': this.props.history.push(`/home/projectDetail?id=${proID}`);break;
         default:;
     }
+
   }
 
   onScroll =(e)=>{
@@ -161,12 +164,12 @@ class ProjectList extends React.Component {
                                                 icon:<icon className="fa fa-info"></icon>,
                                                 text:"更多信息",
                                             }] }
-                                            onClick={ (el,index)=>this.operateBtnOnclick(el,rowData.ID) }
+                                            onClick={ (el,index)=>this.operateBtnOnclick(el,rowData.ID,sectionID) }
                                             />  : <Grid columnNum={1} data={[{
                                                 icon:<icon className="fa fa-pencil"></icon>,
                                                 text:"修改申请"
                                                 }] } 
-                                                onClick={ (el)=>this.operateBtnOnclick(el,rowData.ID) }
+                                                onClick={ (el)=>this.operateBtnOnclick(el,rowData.ID,sectionID) }
                                             /> 
                                     }
                                 </div>
