@@ -1,5 +1,5 @@
 //action对象
-import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE,Filter_Status,Set_Current_Page,WAKE_OPERATE_PANEL,SAVE_VIEW_SIZE} from './actionTypes.js';
+import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE,Filter_Status,Set_Current_Page,SWITCH_OPERATE_PANEL,SAVE_VIEW_SIZE} from './actionTypes.js';
 
 export const fetchAllProjects = () =>{
     const apiUrl = "/api/project/v1/get";
@@ -26,7 +26,7 @@ export const setCurrentPage =  ( p ) =>({
 
 
 export const wakeOperationPanel = (id)=>({
-    type:WAKE_OPERATE_PANEL,
+    type:SWITCH_OPERATE_PANEL,
     id:id
 })
 

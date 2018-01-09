@@ -1,4 +1,4 @@
-import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE,Filter_Status,Set_Current_Page,WAKE_OPERATE_PANEL,SAVE_VIEW_SIZE} from './actionTypes.js';
+import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE,Filter_Status,Set_Current_Page,SWITCH_OPERATE_PANEL,SAVE_VIEW_SIZE} from './actionTypes.js';
 
 function pareseListData( data ){
     if( data === undefined || data === null){
@@ -36,14 +36,13 @@ export default (state = {status:'',filter:{},viewSize:{}} , action) =>{
                 error: action.error
             }
         }
-        case WAKE_OPERATE_PANEL:{
-            const { id } = action;
-    
+        case SWITCH_OPERATE_PANEL:{
+            const { id, isWake } = action;
             state.Data.map( (item,index) =>{
                 if( index.toString() !== id ){
                     item[0].operatePanelAwake = false;
                 }else{
-                    item[0].operatePanelAwake = !item[0].operatePanelAwake;
+                    item[0].operatePanelAwake = !!isWake ?  false : !item[0].operatePanelAwake ;
                 }
                 return null;
             })

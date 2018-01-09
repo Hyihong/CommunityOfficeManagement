@@ -6,6 +6,6 @@ export const FETCH_FAILURE = 'PROJECTS/FETCH_FAILURE';
 export const Filter_Status = "PROJECTS/Filter_Condition_Status"
 export const Set_Current_Page = "PROJECTS/Set_Current_Page"
 
-export const WAKE_OPERATE_PANEL ="PROJECTS/WAKE_OPERATE_PANEL"
+export const SWITCH_OPERATE_PANEL ="PROJECTS/SWITCH_OPERATE_PANEL"
 
 export const SAVE_VIEW_SIZE = "PROJECTS/SAVE_VIEW_SIZE"
