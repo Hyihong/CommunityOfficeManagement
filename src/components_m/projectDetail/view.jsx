@@ -140,7 +140,7 @@ class ProjectDetail extends React.Component {
         }
         return (
             <div>
-                <TopNav home title="电信码号"></TopNav>
+                <TopNav home title= {  this.state.category ==='callingNumber'? "电信码号":"设备类型"}></TopNav>
                 <Animate  transitionName="fade" transitionAppear>
                     { renderContent }
                 </Animate>
