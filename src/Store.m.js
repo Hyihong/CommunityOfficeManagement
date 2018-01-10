@@ -4,6 +4,7 @@ import Perf from 'react-addons-perf' ;
 import { reducer as projectsReducer } from './components_m/projectList'
 import { reducer as buildingListReducer } from './components_m/buildingList'
 import { reducer as roomListReducer } from './components_m/roomList'
+import { reducer as virtualroomReducer } from './components_m/virtualRoom'
 import { reducer as editBuildingReducer } from './components_m/editBuilding'
 import { reducer as editRoomReducer } from './components_m/editRoom'
 import { reducer as createBuildingReducer } from './components_m/createBuilding'
@@ -37,6 +38,7 @@ const originalReducers = {
     createBuilding:createBuildingReducer,
 
     roomList:roomListReducer,
+    virtualRoom:virtualroomReducer,
     editRoom:editRoomReducer,
     createRoom:createRoomReducer,
 

@@ -1,6 +1,6 @@
 import {FETCH_STARTED, FETCH_SUCCESS, FETCH_FAILURE} from './actionTypes.js';
 
-export default (state = { status:'loading'} , action) =>{
+export default (state = { status:''} , action) =>{
     switch(action.type){
         case FETCH_STARTED:
           return {

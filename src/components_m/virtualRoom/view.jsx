@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchVirtualRoomInfo} from './actions'
-import { WhiteSpace,List  } from 'antd-mobile';
+import { WhiteSpace,List,Toast  } from 'antd-mobile';
 import { getQueryString } from '../../tools/baseTools'
 import TopNav from '../shared/views/TopNav'
 import './style.less'
@@ -15,62 +15,76 @@ class SurRoom extends React.Component {
     constructor(props){
         super(props)
         this.state={
-            height:0
+            islistItemFold:[]
         }
     }
-    componentWillMount(){
+    componentDidMount(){
+        //获取成员数据
         this.props.fetchVirtualRoomInfo( getQueryString( this.props.location.search,'ID' ) )
     }
-    componentDidMount(){
+
+    componentWillReceiveProps(nextProps){
+        const { status } = nextProps ;
+        if( status !== this.props.status){
+            if( status === 'loading' ){
+                Toast.loading('Loading...', 0);
+            }else{
+                Toast.hide();
+            }
+
+            if( status === 'success' ){
+                this.setState({
+                    islistItemFold: new Array( nextProps.data.length ).fill(1)
+                })
+            }
+            
+        }
     }
 
-    onSuperLineClick=()=>{
+    onSuperLineClick=(key)=>{
+        let _ = this.state.islistItemFold.concat().fill(1);
+        if( this.state.islistItemFold[key]  ){
+            _[key] = !_[key];
+        }
+        
         this.setState({
-            height:this.state.height === 0 ? "141px":0
+            islistItemFold : _
         })
     }
     render(){
-        const { roomData } = this.props;
-        let customers;
-        if( roomData ){
-            roomData.map(item=>{
-                if(item[0].ID === this.roomId){
-                    customers = item[0].Customers;
-                }
-            })
-        }
+        const { data } = this.props;
         return(
             <div>
                 <TopNav home title="成员列表" ></TopNav>
                 <WhiteSpace></WhiteSpace>  
-                { !!customers ? 
-                  ( <List id="leelen-subroom-list">
-                        <Item arrow="horizontal" onClick={this.onSuperLineClick } thumb={ <icon className="fa fa-heart-o"></icon> }>子房间号：1</Item>
-                        <List className="sub" style={{height:this.state.height}}>
-                            <Item extra="小黄">姓名</Item>
-                            <Item extra="4545655666">电话</Item>
-                            <Item extra="已开通">云对讲</Item>
-                            <WhiteSpace></WhiteSpace>
-                        </List>
-                        <Item arrow="horizontal" onClick={this.onSuperLineClick } thumb={ <icon className="fa fa-heart-o"></icon> }>子房间号：2</Item>
-                        <List className="sub" style={{height:this.state.height}}>
-                            <Item extra="小黄">姓名</Item>
-                            <Item extra="4545655666">电话</Item>
-                            <Item extra="已开通">云对讲</Item>
-                            <WhiteSpace></WhiteSpace>
-                        </List>
-                    </List> ) :<div>重新获取数据</div>
-                 } 
-               
+                <List id="leelen-subroom-list">
+                        {!!data ? 
+                            data.map( (item,idx)=>{
+                                 return(
+                                    <div key={ item.key }>
+                                        <Item arrow="horizontal" onClick={ ()=>this.onSuperLineClick(idx) } thumb={ <icon className="fa fa-heart-o"></icon> }>子房间号：{item.Code}</Item>
+                                        <List className="sub" style={{ height:this.state.islistItemFold[idx] ? 0:"141px"}}>
+                                            <Item extra={ item.Name} >姓名</Item>
+                                            <Item extra={ item.Phone}>电话</Item>
+                                            <Item extra={ item.EnableCloudTalk}>云对讲</Item>
+                                            <WhiteSpace></WhiteSpace>
+                                        </List>
+                                    </div>
+                                 )
+                            })
+                            :  null
+                        }
+                    </List>
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-     const rl =  state.roomList ;
+     const vr =  state.virtualRoom ;
      return{
-        roomData:rl.Data,   
+        data:vr.Data,
+        status:vr.status   
      }
 }
 const mapDispatchToProps = (dispatch) => ({
