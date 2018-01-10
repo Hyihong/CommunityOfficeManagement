@@ -7,7 +7,7 @@ import { view as ProjectList} from './components_m/projectList'
 import  ProjectDetail from './pages_m/ProjectDetail'
 import { view as BuildingList} from './components_m/buildingList'
 import { view as RoomList} from './components_m/roomList'
-import { view as SubRoom} from './components_m/subRoom'
+import { view as VirtualRoom} from './components_m/virtualRoom'
 import { view as editBuilding} from './components_m/editBuilding'
 import { view as editRoom} from './components_m/editRoom'
 import { view as createBuilding} from './components_m/createBuilding'
@@ -48,7 +48,7 @@ class App extends React.Component{
                         <Route  exact path="/home/createBuilding" component={createBuilding}/>
                         {/* 房间管理 */}
                         <Route  exact path="/home/roomList" component={RoomList}/>
-                        <Route  exact path="/home/subRoom" component={ SubRoom }/>
+                        <Route  exact path="/home/virtualRoom" component={ VirtualRoom }/>
                         <Route  exact path="/home/editRoom" component={editRoom}/>
                         <Route  exact path="/home/createRoom" component={createRoom}/>
                         {/* 项目申请与修改 */}

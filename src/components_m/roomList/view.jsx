@@ -134,7 +134,7 @@ class RoomList extends React.Component {
                         </Flex.Item>
                         { !!rowData.Customers && rowData.Customers.length === 0 ? null :
                             <Flex.Item>
-                                <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/subRoom",search:`?id=${rowData.ID}` }}><span className="tag">成员列表</span></Link></div> 
+                                <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/virtualRoom",search:`?id=${rowData.ID}` }}><span className="tag">成员列表</span></Link></div> 
                             </Flex.Item>
                         }  
                         
