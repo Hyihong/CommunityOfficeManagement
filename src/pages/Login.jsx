@@ -50,6 +50,7 @@ class Login extends React.Component{
             }).then( response =>{
                 response.json().then( result =>{
                     if( result.Code === 0){
+                        window.location.reload();
                         window.location.href = '/Home';
                     }else{
                         Modal.error({

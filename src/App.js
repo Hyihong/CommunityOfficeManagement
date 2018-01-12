@@ -101,7 +101,8 @@ const ProjectDetail = (props) => (
 
 
 class App extends React.Component{ 
-    componentWillMount(){
+    componentDidMount(){
+        
     }
     render(){
         return(

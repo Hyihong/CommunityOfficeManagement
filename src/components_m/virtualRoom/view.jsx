@@ -37,7 +37,6 @@ class SurRoom extends React.Component {
                     islistItemFold: new Array( nextProps.data.length ).fill(1)
                 })
             }
-            
         }
     }
 
