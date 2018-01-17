@@ -14,7 +14,9 @@ import { view as createBuilding} from './components_m/createBuilding'
 import { view as createRoom} from './components_m/createRoom'
 import { view as Apply} from './components_m/apply'
 import { view as ApplyModify} from './components_m/applyModify'
+import { view as Upload } from './components_m/importProjectInfo'
 import About from './pages_m/About'
+
 
 //异步页面，代码分割，按需加载
 const Home = (props) => (
@@ -54,6 +56,8 @@ class App extends React.Component{
                         {/* 项目申请与修改 */}
                         <Route  exact path="/home/apply" component={Apply}/>
                         <Route  exact path="/home/applyModify" component={ApplyModify}/>
+                        {/* 文件上传 */}
+                        <Route  exact path="/home/upload" component={Upload}/>
                         
 
                         <Redirect from='*' to='/404' />  

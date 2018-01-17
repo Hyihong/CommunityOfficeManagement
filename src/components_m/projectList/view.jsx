@@ -102,6 +102,7 @@ class ProjectList extends React.Component {
         case '修改申请': this.props.history.push(`/home/applyModify?id=${proID}`);break;
         case '楼栋管理': this.props.history.push(`/home/buildingList?id=${proID}`);break;
         case '更多信息': this.props.history.push(`/home/projectDetail?id=${proID}`);break;
+        case '导入数据': this.props.history.push(`/home/upload?id=${proID}`);break;
         default:;
     }
 
@@ -163,7 +164,11 @@ class ProjectList extends React.Component {
                                             },{
                                                 icon:<icon className="fa fa-info"></icon>,
                                                 text:"更多信息",
-                                            }] }
+                                            },{
+                                                icon:<icon className="fa fa-file-excel-o"></icon>,
+                                                text:"导入数据",
+                                            },
+                                            ] }
                                             onClick={ (el,index)=>this.operateBtnOnclick(el,rowData.ID,sectionID) }
                                             />  : <Grid columnNum={1} data={[{
                                                 icon:<icon className="fa fa-pencil"></icon>,
