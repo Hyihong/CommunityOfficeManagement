@@ -66,11 +66,11 @@ class ProjectDetail extends React.Component {
                     <div>
                         <div className="calling-number leelen-detail-list">
                             <Flex className="header">
-                                <Item style={{flex:"0 0 60px"}}>
+                                <Item style={{flex:"0 0 70px"}}>
                                     <ul className="header-status">
-                                        <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>已用</li>
-                                        <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>未用</li>
-                                        <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>禁用</li>
+                                        <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>已使用</li>
+                                        {/* <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>未使用</li> */}
+                                        <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>未使用</li> 
                                     </ul>
                                 </Item>
                                 <Item><b>码号类型</b></Item>
@@ -81,7 +81,8 @@ class ProjectDetail extends React.Component {
                                     return (
                                         <Flex key={record.key}>
                                             <Item className="status">
-                                                    <div className={record.Status === 1 ? "not-use" :( record.Status === 2 ? "used" :"disable") }> </div>
+                                                {/* 0是禁用（暂无） 1未使用 2已使用 */}
+                                                <div className={ record.Status === 1 ? "disable":"used"  }> </div>
                                             </Item>
                                             <Item>{ record.Type ? <div><icon className="fa fa-podcast" style={{marginRight:"5px"}}></icon>设备</div> :<div><icon className="fa fa-male " style={{marginRight:"5px"}}></icon>用户</div>  }</Item>
                                             <Item>{record.Number}</Item>
@@ -100,11 +101,11 @@ class ProjectDetail extends React.Component {
                     <div>
                         <div className="device leelen-detail-list">
                             <Flex className="header">
-                                <Item style={{flex:"0 0 60px"}}>
+                                <Item style={{flex:"0 0 70px"}}>
                                     <ul className="header-status">
-                                        <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>已用</li>
-                                        <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>未用</li>
-                                        <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>禁用</li>
+                                        <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>在线</li>
+                                        <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>离线</li>
+                                        <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>未使用</li>
                                     </ul>
                                 </Item>
                                 <Item style={{flex:"1 0 30%"}}><b>系列号 | 电信码号</b></Item>
@@ -115,7 +116,8 @@ class ProjectDetail extends React.Component {
                                     return (
                                         <Flex key={record.key}>
                                             <Item className="status">
-                                                    <div className={record.Status === 1 ? "not-use" :( record.Status === 2 ? "used" :"disable") }> </div>
+                                                {/* 0=未使用 1=离线，2=在线 */}
+                                                <div className={record.Status === 1 ? "not-use" :( record.Status === 2 ? "used" :"disable") }> </div>
                                             </Item>
                                             <Item className="number">
                                                 <div><span className="color-1">系</span>{ record.SerialNo}</div>
