@@ -134,10 +134,9 @@ class RoomList extends React.Component {
                         </Flex.Item>
                         { parseInt( rowData.CustomerNumber,10 ) === 0 ? null :
                             <Flex.Item>
-                                <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/virtualRoom",search:`?id=${rowData.ID}` }}><span className="tag">成员列表</span></Link></div> 
+                                <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/virtualRoom",search:`?id=${rowData.ID}` }}><span className="tag">{ parseInt( rowData.CustomerNumber,10 ) }个成员</span></Link></div> 
                             </Flex.Item>
                         }  
-                        
                     </Flex>
                     <Flex>
                         <Flex.Item className="prefix">
