@@ -79,7 +79,7 @@ class List extends React.Component {
                                     return(
                                         <Col lg={12} md={12} sm={12} xs={24} key={item.ID}>
                                             <QueueAnim type="scaleX" duration={[600,0]} >
-                                                <div key={i}>
+                                                <div key={{i}}>
                                                     <Card  className= {item.Status ? "audited" :"auditing" } noHovering={true}
                                                            bodyStyle={{ padding: 0 }} style={{height:"252px"}}>
                                                         <Col lg={{span:10}} md={9} sm={1} xs={9}>{
