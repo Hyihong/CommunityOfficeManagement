@@ -52,7 +52,7 @@ function parseAddress( ad ){
          _city = adArr[0];
          _detail = ad.replace(`${adArr[0]}￥￥`,"");
     }else{
-        _city = [];
+        _city = "";
         _detail = ad;
     }
     return [_city,_detail]  
@@ -60,7 +60,7 @@ function parseAddress( ad ){
 //生成城市数组
 function cityToArray( st ) {
     let cityArr = [];
-    if(st!== undefined && st!== '' ){
+    if(st!== undefined && st!== ''){
          cityArr = st.match( /(\S.*?[省|区|市])(\S.*?[市|区|州|划|县])?(\S.*?[市|区|县])?/ ).filter( (city,idx) =>{
             return city !== undefined && idx !==0;
         });
@@ -162,7 +162,9 @@ componentWillReceiveProps(nextProps){
                 if( key === 'Address' && !!initialData[key] ){
                     const adArr = parseAddress(initialData[key] );
                     this._d['ad_city']= cityToArray( adArr[0] );
+
                     this._d['ad_detail'] = adArr[1];
+          
                 }else{
                     this._d[key]= initialData[key];
                 }
@@ -258,7 +260,6 @@ onDeviceTypeListChange =(value)=>{
 
 render(){
     const { getFieldProps } = this.props.form;
-   
     return( 
         <div>
             <TopNav home title="项目修改"  check onCheckClick={ this.onSubmit }></TopNav>
@@ -385,7 +386,7 @@ render(){
                     <h5>描述<span>（选填）</span></h5>  
                     <TextareaItem title="描述"   
                        {...getFieldProps('desc',{
-                          initialValue: this._d.Desc,
+                          initialValue: !this._d.Desc ? "" : this._d.Desc,
                        })}  
                        rows={3}
                     >
