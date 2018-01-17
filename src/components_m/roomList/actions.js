@@ -6,7 +6,9 @@ import { ADD_ROOM,EDIT_ROOM,SAVE_VIEW_SIZE } from './actionTypes.js';
 
 //根据楼栋ID获取房间信息
 export const fetchRoomInfo = ( buildingID) =>{
-    const apiUrl = `/api/room/v1/get?buildingId=${buildingID}`;
+    //const apiUrl = `/api/room/v1/get?buildingId=${buildingID}`;
+    //此URL为移动端专用URL,返回的数据中不包含【房间成员】的具体信息，反之用CustomerNumber代替
+    const apiUrl = `/api/room/m/v1/get?buildingId=${buildingID}`
     return {
         promise:fetch(apiUrl,{
             method:'get',

@@ -132,7 +132,7 @@ class RoomList extends React.Component {
                         <Flex.Item>
                             <div style={{textAlign:"left",marginRight:"20px",color:"#999",fontSize:"12px"}}>房间代码：{ rowData.Code}</div> 
                         </Flex.Item>
-                        { !!rowData.Customers && rowData.Customers.length === 0 ? null :
+                        { parseInt( rowData.CustomerNumber,10 ) === 0 ? null :
                             <Flex.Item>
                                 <div style={{textAlign:"right",marginRight:"10px"}}><Link to= { {pathname:"/home/virtualRoom",search:`?id=${rowData.ID}` }}><span className="tag">成员列表</span></Link></div> 
                             </Flex.Item>
