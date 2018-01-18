@@ -99,7 +99,7 @@ class EditBuilding extends React.Component {
                     <InputItem 
                         {...getFieldProps('residentPhone',{
                             initialValue: state.residentPhone,
-                            rules: [{required: true,message:"业主电话不能为空"},{pattern:/^\S+$/,message:"业主电话请勿包含空格"}],
+                            rules: [{required: true,message:"业主电话不能为空"},{pattern:/^\S+$/,message:"业主电话请勿包含空格"},{pattern:/^\d{1,11}$/,message:"电话号码格式错误"}],
                         })} 
                         placeholder="请输入业主电话"
                            >业主电话
