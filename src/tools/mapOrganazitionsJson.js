@@ -1,4 +1,3 @@
-//import { isArray } from './baseTools'
 function isArray(object){
     return object && typeof object==='object' &&
             Array === object.constructor;
