@@ -1,5 +1,8 @@
-import { isArray } from './baseTools'
-
+//import { isArray } from './baseTools'
+function isArray(object){
+    return object && typeof object==='object' &&
+            Array === object.constructor;
+}
 // 深度遍历组织机构JSON数据
 export default class mapOrganazitionsJson {
     constructor( data,isForMobile ) {
