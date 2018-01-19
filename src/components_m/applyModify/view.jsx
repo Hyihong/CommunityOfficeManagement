@@ -12,7 +12,7 @@ import { postmodifyApplyForm,fetchApplyInfo } from './actions'
 import TopNav from '../shared/views/TopNav'
 import mapOrganazitionsJson from "../../tools/mapOrganazitionsJson" 
 import { mapChinaDivisionJson } from "../../tools/mapChinaDivisionJson" 
-import { getQueryString} from '../../tools/baseTools'
+import { getQueryString} from '../../tools/baseTools.m'
 import './style.less'
 const divisionJson = require("../../DB/address3.json") ;
 

@@ -23,7 +23,3 @@ export const getQueryString = function getQueryString(search,name) {
     }
     return null;
 }
-
-export const trim = (s)=>{
-      
-}

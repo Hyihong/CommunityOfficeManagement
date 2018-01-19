@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { fetchVirtualRoomInfo} from './actions'
 import { WhiteSpace,List,Toast  } from 'antd-mobile';
-import { getQueryString } from '../../tools/baseTools'
+import { getQueryString } from '../../tools/baseTools.m'
 import TopNav from '../shared/views/TopNav'
 import './style.less'
 

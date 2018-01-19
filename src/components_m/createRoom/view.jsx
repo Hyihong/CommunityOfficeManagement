@@ -6,7 +6,7 @@ import { Radio,Toast,InputItem, List,WhiteSpace  } from 'antd-mobile';
 import { createForm } from 'rc-form';
 import { withRouter } from 'react-router-dom'
 import { actions as roomListAction} from "../roomList"
-//import { getQueryString } from '../../tools/baseTools'
+//import { getQueryString } from '../../tools/baseTools.m'
 
 
 import './style.less'
