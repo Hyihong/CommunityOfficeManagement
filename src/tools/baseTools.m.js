@@ -1,4 +1,4 @@
-//import $ from 'jquery'
+//本文档为移动版存储的工具方法，PC版本因引入JQ，若移动版本与之共用，会使打包体积过大。
 export const isArray = function isArray(object){
     return object && typeof object==='object' &&
             Array === object.constructor;

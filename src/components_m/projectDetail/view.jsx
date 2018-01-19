@@ -4,7 +4,7 @@ import { fetchProjectDetail  } from './actions'
 import { List,Flex } from 'antd-mobile';
 import Animate  from 'rc-animate';
 import TopNav from '../shared/views/TopNav'
-import { getQueryString } from '../../tools/baseTools.m'
+import { getQueryString } from '../../tools/baseTools'
 import './style.less'
 
 export const stateKey = 'project';

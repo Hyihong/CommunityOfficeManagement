@@ -1,7 +1,4 @@
-function isArray(object){
-    return object && typeof object==='object' &&
-            Array === object.constructor;
-}
+import { isArray } from './baseTools'
 // 深度遍历中国省市区数据
 export class mapChinaDivisionJson {
     constructor( data ) {

@@ -8,7 +8,7 @@ import QueueAnim from 'rc-queue-anim';
 import Animate from 'rc-animate';
 import TopNav from '../shared/views/TopNav'
 import { view as Search } from '../search'
-import { getQueryString } from '../../tools/baseTools.m'
+import { getQueryString } from '../../tools/baseTools'
 import './style.less'
 
 //房间列表View
