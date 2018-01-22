@@ -75,31 +75,6 @@ const ProjectDetail = (props) => (
     </Bundle>
 )
 
-
-
-// const BuildingPage = (props) => (
-//     <Bundle  load={(cb) => {
-//         require.ensure([], require => {
-//              const { BuildingPage } = require('./pages/Building');
-//             cb(BuildingPage);
-//         },'import');
-//     }}>
-//         {(BuildingPage) => <BuildingPage {...props}/>}
-//     </Bundle>
-// )
-
-// const RoomPage = (props) => (
-//     <Bundle  load={(cb) => {
-//         require.ensure([], require => {
-//              const { RoomPage } = require('./pages/Room');
-//             cb(RoomPage);
-//         },'import');
-//     }}>
-//         {(RoomPage) => <RoomPage {...props}/>}
-//     </Bundle>
-// )
-
-
 class App extends React.Component{ 
     componentDidMount(){
         

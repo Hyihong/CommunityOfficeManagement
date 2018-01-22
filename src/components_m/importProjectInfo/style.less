@@ -1,42 +1,22 @@
-.anticon-picture:before {
-    content: "\E664";
+#fileForm{
+    margin-top:30px;
+    .chose-icon{
+        position: relative;
+        .fa{
+            transition: font-size 300ms
+        }
+        input{
+            position: absolute;
+            width:100%;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            opacity: 0;
+        }
+    }
 }
 
-#uploadSection{
-    text-align: left;
-    margin-left:9%;
-    margin-bottom:25px;
-     label{
-        float:left;
-     }
-     #tickForIE{
-        float:left;
-        width:85%;
-        margin-left:1%;
-        #tickInput{
-            width:100%;
-            display:inline-block;
-            position: relative;
-            text-align: center;
-            padding:2px 0;
-            border:1px dashed rgb(25, 133, 172);
-            cursor: pointer;
-            input[type='file']{
-               position: absolute;
-               width:100%;
-               top:0;
-               bottom:0;
-               opacity: 0;
-               cursor:pointer;
-            };
-            
-       
-        }
-        #showFilename{
-            padding:15px 0;
-            border:1px solid #d9d9d9;
-            border-radius: 3px;
-            margin-top:10px;
-         }
-     }
+.upload-btn{
+    margin-top:30px;
 }

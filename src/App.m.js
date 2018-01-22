@@ -58,8 +58,6 @@ class App extends React.Component{
                         <Route  exact path="/home/applyModify" component={ApplyModify}/>
                         {/* 文件上传 */}
                         <Route  exact path="/home/upload" component={Upload}/>
-                        
-
                         <Redirect from='*' to='/404' />  
                     </Switch>
                 </div>
