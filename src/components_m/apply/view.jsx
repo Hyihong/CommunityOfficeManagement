@@ -261,7 +261,11 @@ render(){
                     <InputItem 
                            {...getFieldProps('deviceCount',{
                               initialValue:1,
-                              rules: [{required: true,message:"设备数量不能为空"},{pattern:/^\S+$/,message:"项目名称请勿包含空格"},{pattern:/^[1-9]\d*$/,message:"设备数量必须为大于0的整数"}],
+                              rules: [
+                                  {required: true,message:"设备数量不能为空"},
+                                  {pattern:/^\S+$/,message:"项目名称请勿包含空格"},
+                                  {pattern:/^[1-9][0-9]{0,4}$/,message:"设备数量必须在0~100,000之间"}
+                                ],
                            })} 
                            type="number"
                            placeholder="设备数量必须大于0"
