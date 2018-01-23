@@ -2,15 +2,32 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { getQueryString } from '../../tools/baseTools'
-import {Button,WingBlank,Flex,Toast} from 'antd-mobile'
+import {Button,WingBlank,Flex,Toast,WhiteSpace } from 'antd-mobile'
 import TopNav from '../shared/views/TopNav'
-import ProgressCircle from '../shared/views/ProgressCircle'
-import $ from '../../tools/jquery.min.js'
-//import 'jquery-form'
+import ProgressBar from '../shared/views/ProgressBar'
+//import $ from '../../tools/jquery.min.js'
+import $ from 'jquery'
 import './style.less'
 
 const FILE_TYPE_CHECK_INFO = "只接受后缀名为.xls, .xlsx, .xlsm的Excel文件" ;
 const FILE_NAME_PLACEHOLDER= "请选择上传文件";
+const NETWORK_INFO ="请确保处于良好的网络环境，不要关闭浏览器..."
+const INFO_ICON_CLASS = {
+    loading: "fa fa-spin fa-spinner",
+    success: "fa fa-check",
+    failure: "fa fa-close",
+  };
+const UPLOAD_INDO={
+    loading: "正在上传文件...",
+    success: "文件已成功上传！",
+    failure: "文件上传失败！",
+}
+const  MANIPULATE_INDO={
+    loading: "正在为您处理数据，可能需要几分钟，请耐心等待...",
+    success: "数据处理完毕！",
+    failure: "处理数据时发生错误！",
+}
+
 
 class ImportProjectInfo extends React.Component {
    constructor(){
@@ -18,8 +35,10 @@ class ImportProjectInfo extends React.Component {
      this.state = {
          filename:FILE_NAME_PLACEHOLDER,
          btnDisable:true,
-         fileUploading:false,
-         uploadPercentage:0
+         fileUploadingProgress:'ready',//ready->loading->sucess|fauilre
+         uploadPercentage:0,
+         isProgressShow:false,
+         progressStep:'ready' //ready->upload->manipulate
      }
    }
    componentDidMount(){
@@ -31,7 +50,7 @@ class ImportProjectInfo extends React.Component {
             if ( /.xls$|.xlsx$|.xlsm$/.test( filename ) ){
                 this.setState({
                     filename:filename,
-                    btnDisable:false
+                    btnDisable:false,
                 })
             }else{
                 Toast.info(FILE_TYPE_CHECK_INFO);
@@ -53,16 +72,20 @@ class ImportProjectInfo extends React.Component {
 
    handleSumbit=()=>{
        var that = this;
+       //判断文件 size : B
+       let size_kb =this.file.files[0].size / 1024;
+
        //上传文件UI
        this.setState({
-            fileUploading:true,
-            btnDisable:true
+            fileUploadingProgress:"loading",
+            isProgressShow:true,
+            progressStep:'upload'
        })
        //开始上传文件
        let file = this.file.files[0];
        let data = new FormData();
-       data.append("file",file)
-       
+       data.append("file",file) 
+  
        $.ajax({
            url:`/api/project/v1/importProjectInfo?projectid=${this.projectID}`,
            type:"POST",
@@ -70,28 +93,39 @@ class ImportProjectInfo extends React.Component {
            contentType :false,
            data:data,
            success:(result)=>{
-               console.log( result )
+               alert( JSON.parse( result ).Message )
+               if ( JSON.parse( result ).Code.toString() === "0"){
+                setTimeout( ()=>{
+                    this.setState({
+                        fileUploadingProgress:"success",
+                        //进入数据处理流程
+                        progressStep:'manipulate'
+                    })
+                },600)
+               }
            },
            error:(error)=>{
                console.log(error)
+               alert("发生错误")
            },
            xhr:()=>{
                 let xhr = $.ajaxSettings.xhr();
-                xhr.upload.onprogress = function (e) {  
+                //console.log('onprogress' in document.documentElement )
+                xhr.upload.onprogress = function (e) {
                     if(e.lengthComputable ){
                         that.setState({
                             uploadPercentage:(e.loaded/e.total )*100
                         })
                     }
-
                 }  
                return xhr;
            }
        })
    }
 
-    render(){ 
-        const { fileUploading } = this.state ;
+    render=()=>{ 
+        const { fileUploadingProgress,progressStep } = this.state ;
+        let isUploadReady = fileUploadingProgress === 'ready' ;
         return (
             <div>
                 <div>
@@ -101,22 +135,38 @@ class ImportProjectInfo extends React.Component {
                        <Flex>
                            <Flex.Item style={{flex:"0 1 auto"}}>
                                 <div className="chose-icon" >
-                                    <icon className="fa fa-cloud-upload" style={{fontSize: fileUploading ? "30px":"60px",color:"#fff"}}></icon>
-                                    <input ref={ el => this.file= el} type="file" style={{display:fileUploading ? "none": "display" }}onChange={this.handlefileInputChange}/>
+                                    <icon className="fa fa-cloud-upload" style={{fontSize: isUploadReady ? "60px":"30px",color:"#fff"}}></icon>
+                                    <input ref={ el => this.file= el} type="file" style={{display:isUploadReady ? "display": "none" }}onChange={this.handlefileInputChange}/>
                                 </div>
                            </Flex.Item>
                            <Flex.Item>
                                <div className="fileName">
                                    <h3 style={{color:"#fff"}}>{this.state.filename} </h3>
-                                   <h5 style={{color:"#e7615c",height : fileUploading ? "0" :"auto"}}>注：{FILE_TYPE_CHECK_INFO}</h5>
+                                   <h5 style={{color:"#e7615c",height : isUploadReady ? 'auto' :'0'}}>注：{FILE_TYPE_CHECK_INFO}</h5>
                                 </div>
                            </Flex.Item>
                        </Flex>
                     </form>
-                    <div className="progress">
-                        <ProgressCircle percentage={ parseInt( this.state.uploadPercentage,10) } ></ProgressCircle>
+                    <div className="progress" style={{height:this.state.isProgressShow ? 'auto' :'0',opacity:this.state.isProgressShow?1:0 }}>
+                        <WhiteSpace/>
+                        <hr/>
+                        <WhiteSpace/>
+                        <div className="progress-info">
+                            <h3><icon className={ INFO_ICON_CLASS[ fileUploadingProgress] }></icon><span>{ UPLOAD_INDO[fileUploadingProgress]} </span></h3>
+                            {
+                                progressStep === 'manipulate' ?
+                                 <h3><icon className={ INFO_ICON_CLASS['loading'] }></icon><span>{ MANIPULATE_INDO['loading']} </span></h3> 
+                                 : null
+                            }
+                           
+                        </div>
+                        <ProgressBar percentage={ 
+                             progressStep === 'upload' ? 
+                             parseInt( this.state.uploadPercentage,10) : 0 }
+                        >
+                        </ProgressBar>
                     </div>
-                    <Button  type="primary" disabled={this.state.btnDisable}  onClick={ this.handleSumbit } style={{marginTop: fileUploading? "20px":"100px" }}>上传</Button>
+                    <Button  type="primary" disabled={this.state.btnDisable}  onClick={ this.handleSumbit } style={{display: isUploadReady? "block":"none",marginTop:"30px"}}>上传</Button>
                 </WingBlank>
                 
             </div>
@@ -125,7 +175,6 @@ class ImportProjectInfo extends React.Component {
       }
     };
     
-
 const mapStateToProps = (state) => {
     const projects = state.projectList;
     return{
