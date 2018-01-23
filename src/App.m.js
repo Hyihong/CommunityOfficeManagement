@@ -14,7 +14,7 @@ import { view as createBuilding} from './components_m/createBuilding'
 import { view as createRoom} from './components_m/createRoom'
 import { view as Apply} from './components_m/apply'
 import { view as ApplyModify} from './components_m/applyModify'
-import { view as Upload } from './components_m/importProjectInfo'
+//import { view as Upload } from './components_m/importProjectInfo'
 import About from './pages_m/About'
 
 
@@ -26,6 +26,17 @@ const Home = (props) => (
         },'home');
     }}>
         {(Home) => <Home {...props}/>}
+    </Bundle>
+)
+
+const Upload = (props) => (
+    <Bundle  load={(cb) => {
+        require.ensure([], require => {
+            let Upload = require("./components_m/importProjectInfo/view.jsx");
+            cb(Upload);
+        },'upload');
+    }}>
+        {(Upload) => <Upload {...props}/>}
     </Bundle>
 )
 
