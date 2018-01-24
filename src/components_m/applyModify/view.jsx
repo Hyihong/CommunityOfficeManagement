@@ -317,7 +317,7 @@ render(){
                        <InputItem 
                             {...getFieldProps('contact',{
                                 initialValue:this._d.Contact,
-                                rules: [{required: true,message:"联系方式不能为空"},{pattern:/^\S+$/,message:"项目名称请勿包含空格"}],
+                                rules: [{required: true,message:"联系方式不能为空"},{pattern:/^\S+$/,message:"项目名称请勿包含空格"},{max:13,message:"联系方式不能超过13位"}],
                             })} 
                             placeholder="在此输入">
                             联系方式
