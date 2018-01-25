@@ -16,7 +16,6 @@ class Home extends React.Component {
    componentDidMount=()=>{
        document.title="首页"
        const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this.nav).offsetTop; 
-       console.log( hei )
        this.setState({
           height:(hei)/3,
           transform:"scale(1)"

@@ -54,6 +54,12 @@ class ProjectList extends React.Component {
         }else{
             Toast.hide()
         }
+        //设备方向
+        if( this.props.g_ori !== nextProps.g_ori){
+            this.props.saveViewSize({
+                scrollContainterHeight : document.documentElement.clientHeight - ReactDOM.findDOMNode(this._listViewOccupy).offsetTop
+            })
+         }
     }
     componentWillUpdate(){
     }
@@ -218,10 +224,13 @@ class ProjectList extends React.Component {
 
 const mapStateToProps = (state) => {
     const pl = state.projectList ;
+    const global =  state.global ;
     return{
         data:pl.Data,
         viewSize:pl.viewSize,
-        loadingStatus:pl.status
+        loadingStatus:pl.status,
+        g_ori: global.orientation         
+
     }
 }
 

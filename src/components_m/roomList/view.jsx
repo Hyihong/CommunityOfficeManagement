@@ -48,6 +48,12 @@ class RoomList extends React.Component {
                 Toast.hide();
             }
         }
+         //设备方向
+         if( this.props.g_ori !== nextProps.g_ori){
+            this.props.saveViewSize({
+                scrollContainterHeight : document.documentElement.clientHeight - this._listViewOccupy.offsetTop
+            })
+         }
       
     }
     
@@ -251,11 +257,12 @@ class RoomList extends React.Component {
 
 const mapStateToProps = (state) => {
      const rl =  state.roomList ;
+     const global =  state.global ;
      return{
         roomData:rl.Data,
         loadingStatus:rl.status,
         viewSize:rl.viewSize,
-          
+        g_ori: global.orientation
      }
 }
 const mapDispatchToProps = (dispatch) => ({

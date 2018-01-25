@@ -52,12 +52,18 @@ class Project extends React.Component {
                 Toast.hide();
             }
         }
+        
+        //设备方向
+        if( this.props.g_ori !== nextProps.g_ori){
+            this.props.saveViewSize({
+                scrollContainterHeight : document.documentElement.clientHeight - this._listViewOccupy.offsetTop
+            })
+         }
       
     }
     
     componentDidMount(){ 
          //设置列表滚动高度
-            //const hei = document.documentElement.clientHeight - ReactDOM.findDOMNode(this._lv).offsetTop;
             const hei = document.documentElement.clientHeight - this._listViewOccupy.offsetTop;
             this.props.saveViewSize({
                 scrollContainterHeight : hei
@@ -271,11 +277,12 @@ class Project extends React.Component {
 
 const mapStateToProps = (state) => {
      const bl =  state.buildingList.buildingList ;
+     const global =  state.global ;
      return{
         bdData:bl.Data,
         viewSize:state.buildingList.viewSize,
-        loadingStatus:bl.status
-          
+        loadingStatus:bl.status,
+        g_ori: global.orientation
      }
 }
 const mapDispatchToProps = (dispatch) => ({
