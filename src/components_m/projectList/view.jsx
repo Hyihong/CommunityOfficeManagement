@@ -135,7 +135,7 @@ class ProjectList extends React.Component {
                                 <div className={ `info-panel ${ rowData.operatePanelAwake ? 'awake':'sleep'}` } >
                                     <div className="fold-guide">
                                         <div onClick={ ()=>this.wakeOperationPanel(sectionID) }>
-                                                { rowData.operatePanelAwake ? <icon className="fa fa-arrow-circle-right" style={{fontSize:"30px"}}></icon>:<icon className="fa fa-arrow-circle-left" style={{fontSize:"30px"}}></icon>}
+                                                { rowData.operatePanelAwake ? <icon className="fa fa-arrow-circle-right" style={{fontSize:"30px",color:"rgba(0,0,0,0.3)"}}></icon>:<icon className="fa fa-arrow-circle-left" style={{fontSize:"30px",color:"rgba(0,0,0,0.3)"}}></icon>}
                                             </div>
                                     </div>
                                     <ul className="project-card">
