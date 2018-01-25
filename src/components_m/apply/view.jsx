@@ -36,7 +36,6 @@ function countActualLength( str){
 //获取项目ID
 function getActualValue( arr){
     for( let i = arr.length -1;i>=0;i--){
-        console.log(arr[i] )
         if( arr[i] !== '' ){
             return arr[i];
         }
@@ -102,7 +101,8 @@ componentWillReceiveProps(nextProps){
             })
         }
     }
-
+    
+    //申请结果
     if(nextProps.status !== this.props.status ){
         if(nextProps.status==='success'){
             this.props.fetchAllProjects();
@@ -114,6 +114,13 @@ componentWillReceiveProps(nextProps){
             Toast.error( '项目申请失败：'+nextProps.errMsg, 3);
         }
     }
+
+     //设备方向
+     if( this.props.g_ori !== nextProps.g_ori){
+        this.setState({
+            height:document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop
+        })
+     }
 }
 
 onSubmit=()=>{
@@ -321,9 +328,11 @@ const WrappedApply = createForm()(Apply);
 const mapStateToProps = (state) => {
     const apply =  state.apply ;
     const organizations = state.organizations;
+    const global =  state.global ;
     return{
          status:apply.status, 
-         orzAll:organizations.orzAll
+         orzAll:organizations.orzAll,
+         g_ori: global.orientation    
     }
 }
 

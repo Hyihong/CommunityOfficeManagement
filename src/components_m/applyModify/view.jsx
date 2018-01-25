@@ -174,6 +174,12 @@ componentWillReceiveProps(nextProps){
             })
         }
     }
+     //设备方向
+     if( this.props.g_ori !== nextProps.g_ori){
+        this.setState({
+            height:document.documentElement.clientHeight - ReactDOM.findDOMNode(this.lv).parentNode.offsetTop
+        })
+     }
 
 }
 
@@ -410,10 +416,12 @@ const WrappedApplyModify = createForm()(ApplyModify);
 const mapStateToProps = (state) => {
     const modify =  state.applyModify ;
     const organizations = state.organizations;
+    const global =  state.global ;
     return{
         fetchData:modify.fetchData,
         postData:modify.postData,
-        orzAll:organizations.orzAll
+        orzAll:organizations.orzAll,
+        g_ori: global.orientation    
     }
 }
 
