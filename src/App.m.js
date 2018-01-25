@@ -1,5 +1,7 @@
 import React from 'react';
 import {Route,Switch ,Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Toast } from 'antd-mobile'
 import { Bundle }from './components/functional'
 import './cover.m.less'
 
@@ -14,9 +16,11 @@ import { view as createBuilding} from './components_m/createBuilding'
 import { view as createRoom} from './components_m/createRoom'
 import { view as Apply} from './components_m/apply'
 import { view as ApplyModify} from './components_m/applyModify'
-//import { view as Upload } from './components_m/importProjectInfo'
 import About from './pages_m/About'
 
+import { actions as globalAction } from './components_m/shared'
+
+const { saveScreenOrientation } =globalAction;
 
 //异步页面，代码分割，按需加载
 const Home = (props) => (
@@ -40,9 +44,42 @@ const Upload = (props) => (
     </Bundle>
 )
 
+const WARNING_INFO = "为获得良好的用户体验，强烈建议您竖屏浏览!";
 class App extends React.Component{ 
+    componentWillMount(){
+       
+    }
     componentDidMount(){
         document.addEventListener("touchstart", function(){}, true);
+         //屏幕方向检测
+         const _o = this.detectScreen() ;
+         this.props.saveOrientation(_o);
+         if( _o === 'l'){
+            setTimeout( ()=>{
+                Toast.info(WARNING_INFO,2);
+            },500)
+        }
+        
+        //监听屏幕方向
+        let evt = "onorientationchange" in window ? "orientationchange" : "resize";
+        window.addEventListener(evt,()=>{
+            let _o2 = this.detectScreen();
+            this.props.saveOrientation(_o2);
+            if(_o2 === 'l'){
+                Toast.info(WARNING_INFO,2)
+            }else if( _o2 === 'unknow'){
+                window.reload();
+            }
+        },false);
+    }
+    componentWillReceiveProps(){
+
+    }
+    detectScreen(){
+        if( !!window.matchMedia ){
+            return  window.matchMedia("(orientation: portrait)").matches ? 'p':'l';
+        }
+        return 'unknow'
     }
     render(){
         return(
@@ -76,6 +113,13 @@ class App extends React.Component{
     }
 };
 
-export default App;
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        saveOrientation: (o)=> dispatch( saveScreenOrientation(o) )
+     }
+ }
+
+export default connect(null,mapDispatchToProps)(App);
 
 

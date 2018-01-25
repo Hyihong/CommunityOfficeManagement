@@ -10,9 +10,10 @@ import { reducer as editRoomReducer } from './components_m/editRoom'
 import { reducer as createBuildingReducer } from './components_m/createBuilding'
 import { reducer as createRoomReducer } from './components_m/createRoom'
 import { reducer as applyReducer } from './components_m/apply'
-import { reducer as applyModify } from './components/applyModify'
+import { reducer as applyModify } from './components_m/applyModify'
 import { reducer as organizationsReducer } from './components/organizations'
-import { reducer as projectDetailReducer } from './components/projectDetail'
+import { reducer as projectDetailReducer } from './components_m/projectDetail'
+import { reducer as globalReducer } from './components_m/shared'
 
 
 
@@ -30,6 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const originalReducers = {
     routing: routerReducer,
+    global:globalReducer,
     projectList: projectsReducer,
     projectDetail:projectDetailReducer,
 

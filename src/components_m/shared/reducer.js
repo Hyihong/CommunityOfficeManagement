@@ -1,26 +1,12 @@
-import { CHANGEMENU ,MENUITEMCLICK,INITIALIZE } from './actionTypes.js';
-const initState = {
-      current: 'home',
-      openKeys: [],
-}
-export default (state = initState, action) => {
+import { ORIENTATION } from './actionTypes.js';
+
+export default (state = {}, action) => {
 switch (action.type) {
-    case CHANGEMENU:
+    case ORIENTATION:
         return {
                 ...state,
-                openKeys:action.openKeys
+                orientation:action.orientation
             } ;
-    case MENUITEMCLICK:
-         return {
-               ...state,
-                current:action.current
-         };
-     case INITIALIZE:
-         return {
-               ...state,
-                current:action.current,
-                openKeys:action.openKeys
-         };
     default:
         return state
 }
