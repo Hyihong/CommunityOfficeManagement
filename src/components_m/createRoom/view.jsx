@@ -42,10 +42,9 @@ class CreateBuilding extends React.Component {
          //创建房间信息反馈
          const { status,history }= this.props;
          if( nextProps.status === 'success' &&  nextProps.status!== status ){
-             console.log("创建房间成功")
             //将新数据插入房间列表
-            console.log(nextProps.newRoomData )
-            this.props.AddNewRoomToList( {...nextProps.newRoomData} );
+            const {Gender,...rest,}=nextProps.newRoomData ;
+            this.props.AddNewRoomToList( {...rest,Gender:Gender.toString()==='1' ? '男':'女'} );
             Toast.success("创建房间成功！",1.5);
             setTimeout( ()=>{
                 history.goBack()
