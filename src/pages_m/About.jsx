@@ -30,7 +30,7 @@ class About extends React.Component {
                 <div className="leelen-user-info-container">
                 <icon className="fa fa-angle-left back" style={{fontSize:"34px",margin:"10px 0 0 10px",color:"#fff"}} onClick ={ ()=>this.props.history.goBack()}/>
                       <div className="leelen-user">
-                          <div className="avatar"><img src={avatar} alt="" onClick={ this.avatarClick }/></div>
+                          <div className="avatar"><img src={avatar} alt="" onClick={ this.avatarClick } style={{border:0}}/></div>
                       </div>
                       <div style={{textAlign:"center",color:"#303336",fontSize:"20px"}}> { document.getElementById('username') ?  document.getElementById('username').value : "developer" } </div>
                 </div>
