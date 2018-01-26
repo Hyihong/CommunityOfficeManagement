@@ -161,6 +161,7 @@ class List extends React.Component {
                                     )
                                 })
                             }
+                            <div style={{clear:"both"}}></div>
                             <div style={{width:"100%",textAlign:"center"}}>
                                 {
                                     filterData.length > 4 ?  <Pagination

@@ -1,15 +1,15 @@
 #root{
   display: block;
   position: relative;
-  min-height:784px;
+  min-height:870px;
   height:100%;
 }
-@media screen and (max-width: 992px){
-  #root{
-    min-height:600px;
-    height:auto !important;
-  }
-}
+//@media screen and (max-width: 992px){
+  //#root{
+    //min-height:600px;
+    //height:auto !important;
+  //}
+//}
 .lee-guide{
   min-height:180px;
   height:100%;
@@ -38,33 +38,37 @@
             top:-80px;
             background-color:#fff;
         }
-      .circle{
-            width: 110px;
-            height:110px;
-            border: 1px solid #cfcfcf;
-            border-radius: 50%;
-            background-color: #fff;
-            margin: 0 auto;
-            text-align: center;
-            padding-top: 26px;
-        >div{margin: 0 auto;}
-        .list-img{
-          height: 75%;
-          width: 75%;
-          background: url("../../assets/images/home/list.png") no-repeat center;
+        .circle{
+              width: 110px;
+              height:110px;
+              border: 1px solid #cfcfcf;
+              border-radius: 50%;
+              background-color: #fff;
+              margin: 0 auto;
+              text-align: center;
+              padding-top: 26px;
+              transition: background 1s ease;
+              -moz-transition: background 1s ease;
+              -webkit-transition: background 1s ease;
+              -o-transition: background 1s ease;
+          >div{margin: 0 auto;}
+          .list-img{
+            height: 75%;
+            width: 75%;
+            background: url("../../assets/images/home/list.png") no-repeat center;
+          }
+          .apply-img{
+            width: 68%;
+            height: 90%;
+            margin-top: -8px;
+            background: url("../../assets/images/home/apply.png") no-repeat;
+          }
+          .import-img{
+            width:65%;
+            height: 80%;
+            background: url("../../assets/images/home/import.png") no-repeat;
+          }
         }
-        .apply-img{
-          width: 68%;
-          height: 90%;
-          margin-top: -8px;
-          background: url("../../assets/images/home/apply.png") no-repeat;
-        }
-        .import-img{
-          width:65%;
-          height: 80%;
-          background: url("../../assets/images/home/import.png") no-repeat;
-        }
-      }
         .details{
             position:absolute;
             left:0;right:0;bottom:5px;
