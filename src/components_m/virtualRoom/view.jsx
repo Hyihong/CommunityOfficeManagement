@@ -54,18 +54,18 @@ class SurRoom extends React.Component {
         const { data } = this.props;
         return(
             <div>
-                <TopNav home title="成员列表" ></TopNav>
+                <TopNav home title="云对讲用户" ></TopNav>
                 <WhiteSpace></WhiteSpace>  
                 <List id="leelen-subroom-list">
                         {!!data ? 
                             data.map( (item,idx)=>{
                                  return(
                                     <div key={ item.key }>
-                                        <Item arrow="horizontal" onClick={ ()=>this.onSuperLineClick(idx) } thumb={ <icon className="fa fa-heart-o"></icon> }>子房间号：{item.Code}</Item>
+                                        <Item arrow="horizontal" onClick={ ()=>this.onSuperLineClick(idx) } thumb={ <icon className="fa fa-heart-o"></icon> }>用户名：{item.CustomerName}</Item>
                                         <List className="sub" style={{ height:this.state.islistItemFold[idx] ? 0:"141px"}}>
-                                            <Item extra={ item.Name} >姓名</Item>
-                                            <Item extra={ item.Phone}>电话</Item>
+                                            <Item extra={ item.CustomerPhone}>电话</Item>
                                             <Item extra={ item.EnableCloudTalk}>云对讲</Item>
+                                            <Item extra={ item.VirtualCode === "" ? "无" : item.VirtualCode} >房间子号</Item>
                                             <WhiteSpace></WhiteSpace>
                                         </List>
                                     </div>
