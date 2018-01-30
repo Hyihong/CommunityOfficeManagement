@@ -44,6 +44,7 @@ const Upload = (props) => (
     </Bundle>
 )
 
+
 const WARNING_INFO = "为获得良好的用户体验，强烈建议您竖屏浏览!";
 class App extends React.Component{ 
     componentWillMount(){
@@ -71,9 +72,6 @@ class App extends React.Component{
                 window.reload();
             }
         },false);
-    }
-    componentWillReceiveProps(){
-
     }
     detectScreen(){
         if( !!window.matchMedia ){

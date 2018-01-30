@@ -24,9 +24,6 @@ export const getQueryString = function getQueryString(search,name) {
     return null;
 }
 
-export const trim = (s)=>{
-      
-}
 //判断是否兼容placeholder方法
 export const setPlaceholder = () =>{
     if (!placeholderSupport()&& $(".placeholder").length===0) {
