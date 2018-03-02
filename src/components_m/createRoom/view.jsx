@@ -90,10 +90,10 @@ class CreateBuilding extends React.Component {
                   <div className="leelen-create-building">
                         <List>  
                             <div className="leelen-input-section">
-                                <p className="tip">房间代码</p>
+                                <p className="tip">房间代码(请填8位数字)</p>
                                 <InputItem 
                                     {...getFieldProps('roomCode',{
-                                        rules: [{required: true,message:"房间代码不能为空"},{pattern:/^\S+$/,message:"房间代码请勿包含空格"}],
+                                        rules: [{required: true,message:"房间代码不能为空"},{pattern:/^\S+$/,message:"房间代码请勿包含空格"},{pattern:/^\d{8}$/,message:"房间代码只能为8位纯数字"}],
                                     })} 
                                     placeholder="请输入房间代码"
                                     >

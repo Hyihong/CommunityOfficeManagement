@@ -75,10 +75,10 @@ class CreateBuilding extends React.Component {
                     <List>  
                             <QueueAnim delay={0} className="queue-simple">
                             <div className="leelen-input-section" key="1">
-                                <p className="tip">楼栋代码</p>
+                                <p className="tip">楼栋代码（请填4位数字）</p>
                                 <InputItem 
                                     {...getFieldProps('bdCode',{
-                                        rules: [{required: true,message:"楼栋代码不能为空"},{pattern:/^\S+$/,message:"楼栋代码请勿包含空格"}],
+                                        rules: [{required: true,message:"楼栋代码不能为空"},{pattern:/^\S+$/,message:"楼栋代码请勿包含空格"},{pattern:/^\d{4}$/,message:"楼栋代码只能为4位数字"}],
                                     })} 
                                     placeholder="请输入楼栋代码"
                                     >

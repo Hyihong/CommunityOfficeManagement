@@ -76,7 +76,7 @@ class EditBuilding extends React.Component {
                     <InputItem 
                         {...getFieldProps('bdCode',{
                             initialValue: state.code,
-                            rules: [{required: true,message:"楼栋代码不能为空"},{pattern:/^\S+$/,message:"楼栋代码请勿包含空格"}],
+                            rules: [{required: true,message:"楼栋代码不能为空"},{pattern:/^\S+$/,message:"楼栋代码请勿包含空格"},{pattern:/^\d{4}$/,message:"楼栋代码只能为4位纯数字"}],
                         })} 
                         placeholder="请输入楼栋代码"
                         //error ={true}
