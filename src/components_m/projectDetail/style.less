@@ -12,7 +12,7 @@
         &.header{
             border-bottom:1px solid #474646;
             .am-flexbox-item{
-                padding: 5px 10px;
+                padding: 5px 5px;
             }
             .header-status{
                 text-align: left;
@@ -32,7 +32,7 @@
         .am-flexbox-item{
              padding: 10px;
              &.status{
-                 margin-left:15px;
+                 margin-left:10px;
                  padding: 0px;
                  flex: 0 0 45px;
                  font-size:10px;
@@ -61,15 +61,25 @@
         .am-flexbox-item{
             text-align: left;
             &.status{
-                flex: 0 0 30px;
+                flex: 0 0 28px;
             }
             &.number{
-                flex:1 0 30%;
+                flex:1 1 30%;
+                padding-left: 4px;
+            }
+            &.number{
+                //flex:1 1 35%;
+            }
+            &.about{
+                flex:1 0 28%;
+                padding:10px 0 ;
             }
             span{
-                font-size:9px;
+                font-size:8px;
+                float:left;
+                margin-top:5px;
                 padding:0 1px;
-                line-height: 1;
+                line-height: 1.2;
                 margin-right:3px;
                 color:#fff;
                 border:1px solid;

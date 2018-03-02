@@ -101,15 +101,15 @@ class ProjectDetail extends React.Component {
                     <div>
                         <div className="device leelen-detail-list">
                             <Flex className="header">
-                                <Item style={{flex:"0 0 70px"}}>
+                                <Item style={{flex:"0 0 65px"}}>
                                     <ul className="header-status">
                                         <li key="1" style={{color:'#47cf73'}}><span style={{background:'#47cf73'}}></span>在线</li>
                                         <li key="2" style={{color:'#fe4800'}}><span style={{background:'#fe4800'}}></span>离线</li>
                                         <li key="3" style={{color:'#b7b9b8'}}><span style={{background:'#b7b9b8'}}></span>未使用</li>
                                     </ul>
                                 </Item>
-                                <Item style={{flex:"1 0 30%"}}><b>系列号 | 电信码号</b></Item>
-                                <Item><b>类型 | 版本</b></Item>
+                                <Item style={{flex:"1 1 25%",marginLeft:0}}><b>系列号 | 电信码号</b></Item>
+                                <Item style={{flex:"1 1 25%"}}><b>类型 | 版本</b></Item>
                             </Flex>
                             <div className="leelen-detail-list-body" style={{height:this.state.listHeight}} ref={el => this.listbody = el }>
                                 { this.props.data.Device.map( record =>{
@@ -126,7 +126,8 @@ class ProjectDetail extends React.Component {
                                             </Item>
                                             <Item className="about"> 
                                                 <div><span className="color-3">类</span>{ record.DeviceType === 1 ? "围墙机" :( record.DeviceType === 2 ? "单元主机" :"室内分机") }</div>
-                                                <div><span className="color-4">版</span>{ record.Desc}</div>
+                                                <div><span className="color-4">版</span>{ record.Desc }</div> 
+                                                
                                             </Item>
                                         </Flex>
                                     )
@@ -164,5 +165,4 @@ const mapDispatchToProps = (dispatch) => ({
     },
 });
 
-//export default connect(mapStateToProps, mapDispatchToProps)(Project);
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectDetail);
