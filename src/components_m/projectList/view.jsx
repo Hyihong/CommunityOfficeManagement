@@ -107,7 +107,7 @@ class ProjectList extends React.Component {
     switch(el.text){
         case '修改申请': this.props.history.push(`/home/applyModify?id=${proID}`);break;
         case '楼栋管理': this.props.history.push(`/home/buildingList?id=${proID}`);break;
-        case '更多信息': this.props.history.push(`/home/projectDetail?id=${proID}`);break;
+        case '项目数据': this.props.history.push(`/home/projectDetail?id=${proID}`);break;
         case '导入数据': this.props.history.push(`/home/upload?id=${proID}`);break;
         default:;
     }
@@ -169,7 +169,7 @@ class ProjectList extends React.Component {
                                             text:"楼栋管理"
                                             },{
                                                 icon:<icon className="fa fa-info"></icon>,
-                                                text:"更多信息",
+                                                text:"项目数据",
                                             },{
                                                 icon:<icon className="fa fa-file-excel-o"></icon>,
                                                 text:"导入数据",
