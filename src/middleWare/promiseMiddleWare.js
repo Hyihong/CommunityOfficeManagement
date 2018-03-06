@@ -1,3 +1,5 @@
+import { Toast } from 'antd-mobile'
+
 function isPromise(obj){
     return obj && typeof obj.then === 'function';
 }
@@ -14,7 +16,13 @@ export default function promiseMiddleware( {dispatch} ) {
                const [pending, done, fail] = types;
 
                dispatch({...rest,type:pending});
+
+               if(navigator.onLine){
+
+               }
+         
                action.promise.then( response => {
+
                    switch( response.status){
                        case 200 : {
                               response.json().then( 
@@ -50,6 +58,9 @@ export default function promiseMiddleware( {dispatch} ) {
                             dispatch({ type: fail,error:{ statusText :"发生未知错误"}})
                        }
                    } 
+               }).catch( error =>{
+
+                    dispatch({ type: fail,error:{ statusText :"请检查网络连接"}})
                })
           }
       }

@@ -17,6 +17,7 @@ import { view as createRoom} from './components_m/createRoom'
 import { view as Apply} from './components_m/apply'
 import { view as ApplyModify} from './components_m/applyModify'
 import About from './pages_m/About'
+import Test from './pages_m/Test'
 
 import { actions as globalAction } from './components_m/shared'
 
@@ -46,6 +47,8 @@ const Upload = (props) => (
 
 
 const WARNING_INFO = "为获得良好的用户体验，强烈建议您竖屏浏览!";
+
+
 class App extends React.Component{ 
     componentWillMount(){
        
@@ -104,6 +107,9 @@ class App extends React.Component{
                         <Route  exact path="/home/applyModify" component={ApplyModify}/>
                         {/* 文件上传 */}
                         <Route  exact path="/home/upload" component={Upload}/>
+                        {/* 测试 */}
+                        <Route  exact path="/home/test" component={Test}/>
+
                         <Redirect from='*' to='/404' />  
                     </Switch>
                 </div>

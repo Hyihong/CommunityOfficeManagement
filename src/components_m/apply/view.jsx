@@ -123,6 +123,7 @@ componentWillReceiveProps(nextProps){
      }
 }
 
+//表单提交
 onSubmit=()=>{
     const { validateFields } = this.props.form;
     validateFields((error, value) => {
@@ -200,21 +201,22 @@ onDeviceTypeListChange =(value)=>{
             DeviceTypeListValue:[value, ...DeviceTypeListValue]
         })
     }
-   
-    
 }
 
+handleFocus =(el)=>{
+  
+}
 
 render(){
     const { getFieldProps } = this.props.form;
     return( 
         <div> 
             <TopNav home title="项目申请"  check onCheckClick={ this.onSubmit }></TopNav>
-            <div className="leelen-apply" style={{height:this.state.height}}>
+            {/* <div className="leelen-apply" style={{height:this.state.height}}> */}
+            <div className="leelen-apply">
                 <WingBlank size="ls">   
                 <Animate  transitionName="fade" transitionAppear>
                 <List ref={el => this.lv = el} >
-
                     <h5>项目<span className="require">（必填）</span></h5>
                     <InputItem 
                         placeholder="在此输入"
@@ -250,21 +252,18 @@ render(){
                         })}
                         >负责人
                     </InputItem> 
-
                     <InputItem  
                         {...getFieldProps('contactor',{
                             rules: [{required: true,message:"联系人不能为空"},{pattern:/^\S+$/,message:"联系人请勿包含空格"}],
                         })} 
                         placeholder="在此输入">联系人
                     </InputItem> 
-
                     <InputItem 
                             {...getFieldProps('contact',{
                                 rules: [{required: true,message:"联系方式不能为空"},{pattern:/^\S+$/,message:"项目名称请勿包含空格"},{max:13,message:"联系方式不能超过13位"}],
                             })} 
                             placeholder="在此输入">联系方式
                     </InputItem> 
-
                     <InputItem 
                            {...getFieldProps('deviceCount',{
                               initialValue:1,
@@ -274,18 +273,16 @@ render(){
                                   {pattern:/^[1-9][0-9]{0,4}$/,message:"设备数量必须在0~100,000之间"}
                                 ],
                            })} 
+                          
                            type="number"
                            placeholder="设备数量必须大于0"
                         >设备数量
                     </InputItem>
                    
-
-
                     <h5>设备类型<span className="require">（必选）</span></h5>
                     <CheckboxItem key={1}  onChange={()=>this.onDeviceTypeListChange(4)}>室内分机</CheckboxItem>
                     <CheckboxItem key={2}  onChange={()=>this.onDeviceTypeListChange(1)}>围墙机</CheckboxItem>
                     <CheckboxItem key={3}  onChange={()=>this.onDeviceTypeListChange(2)}>单元主机</CheckboxItem>
-                   
 
 
                     <h5>地址<span>（选填）</span></h5>
@@ -300,19 +297,21 @@ render(){
                     </Picker>
 
                     <TextareaItem 
-                        title="详细地址" autoHeight 
+                        title="详细地址" 
+                        autoHeight 
                         {...getFieldProps('address_detail')} 
-                    ></TextareaItem>  
-
+                        onFocus = { this.handleFocus }
+                    >
+                    </TextareaItem> 
+                                       
                     <h5>描述<span>（选填）</span></h5>  
-                    <TextareaItem title="描述"   
+                    <TextareaItem 
+                       title="描述"   
                        {...getFieldProps('desc')}  
                       rows={3}>
                     </TextareaItem>  
-
                     <WhiteSpace></WhiteSpace>
-                    <WhiteSpace></WhiteSpace>
-
+                    <WhiteSpace></WhiteSpace>                    
                 </List>  
                 </Animate> 
                 </WingBlank>   

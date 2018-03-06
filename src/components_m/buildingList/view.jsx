@@ -210,7 +210,6 @@ class Project extends React.Component {
                                 dataSource.push( item ) 
                         }
                })
-               
            }
        }else{
            dataSource = this.props.bdData;
@@ -282,6 +281,7 @@ const mapStateToProps = (state) => {
         bdData:bl.Data,
         viewSize:state.buildingList.viewSize,
         loadingStatus:bl.status,
+        loadingMsg:bl.errMsg,
         g_ori: global.orientation
      }
 }
@@ -298,3 +298,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default  withRouter( connect(mapStateToProps, mapDispatchToProps)(Project) );
+
+
+
+

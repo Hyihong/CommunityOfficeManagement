@@ -159,11 +159,16 @@ componentWillReceiveProps(nextProps){
             Toast.hide();
             
             Object.keys(initialData).map((key)=>{
-                if( key === 'Address' && !!initialData[key] ){
-                    const adArr = parseAddress(initialData[key] );
-                    this._d['ad_city']= cityToArray( adArr[0] );
-
-                    this._d['ad_detail'] = adArr[1];
+                if( key === 'Address' ){
+                    if( !!initialData[key]){
+                        const adArr = parseAddress(initialData[key] );
+                        this._d['ad_city']= cityToArray( adArr[0] );
+                        this._d['ad_detail'] = adArr[1];
+                     }else{
+                         //原始值为null或undefined ，数据来源主要是从总后台直接创建项目
+                         this._d['ad_city']= [];
+                         this._d['ad_detail'] ="";
+                     }
           
                 }else{
                     this._d[key]= initialData[key];
@@ -397,7 +402,6 @@ render(){
                        rows={3}
                     >
                     </TextareaItem>  
-
                     <WhiteSpace></WhiteSpace>
                     <WhiteSpace></WhiteSpace>
 

@@ -20,7 +20,6 @@ class ApplyPage extends React.Component{
     }
     render(){
         const { match } = this.props;
-        console.log( match.url)
         return(
             <div>
                 <Return> { this.state.title }</Return>  

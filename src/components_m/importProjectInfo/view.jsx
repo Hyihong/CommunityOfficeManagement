@@ -103,20 +103,19 @@ class ImportProjectInfo extends React.Component {
            data:data,
            success:(result)=>{
                 clearInterval(clock1);
+                console.log('success')
+                console.log( result )
                 if ( JSON.parse( result ).Code.toString() === "0"){
-                that.setState({ uploadPercentage:100 });
-                setTimeout( ()=>{
-                    this.setState({
-                        fileUploadingProgress:"success",
-                        //进入数据处理流程
-                        progressStep:'manipulate'
-                    })
-                    //轮询获取上传进度
-                    this.trackProgress(_guid);
-                },600)
-
-                
-
+                    that.setState({ uploadPercentage:100 });
+                    setTimeout( ()=>{
+                        this.setState({
+                            fileUploadingProgress:"success",
+                            //进入数据处理流程
+                            //progressStep:'manipulate'
+                        })
+                        //轮询获取上传进度
+                        //this.trackProgress(_guid);
+                    },600)
                }else{
                    alert( JSON.parse( result ).Message )
                }
@@ -128,7 +127,10 @@ class ImportProjectInfo extends React.Component {
                 let xhr = $.ajaxSettings.xhr();
                 if( 'onprogress' in window){
                     xhr.upload.onprogress = function (e) {
+                        console.log(e)
                         if(e.lengthComputable ){
+                            console.log(e.loaded)
+                            console.log(e.total)
                             if(e.loaded !== e.total ){
                                 that.setState({
                                     uploadPercentage:(e.loaded/e.total )*100
@@ -138,7 +140,7 @@ class ImportProjectInfo extends React.Component {
                     }  
                 }else{
                     that.setState({
-                        uploadPercentage:20
+                        uploadPercentage:20 // fake progress 
                     })
                 }
                return xhr;

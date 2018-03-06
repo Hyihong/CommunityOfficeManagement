@@ -129,6 +129,7 @@ handleSubmit =(e)=>{
     }else{
         //*******提交申请 ******
         let {  name, organizationId, master, contactor, contact, deviceCount,desc,address,city, deviceTypeList } = getFieldsValue();
+        console.log( address )
         //拼接地址
         this.props.postmodifyApplyForm(    
             this.props.fetchData.Data.ID,
@@ -168,12 +169,16 @@ render(){
      let _d = {};
      if( !!initialData  ){
          Object.keys(initialData).map((key)=>{
-             if( key === 'Address' && !!initialData[key] ){
-
-                 const adArr = parseAddress(initialData[key] );
-
-                 _d['ad_city']= cityToArray( adArr[0] );
-                 _d['ad_detail'] = adArr[1];
+             if( key === 'Address'){
+                 if( !!initialData[key]){
+                    const adArr = parseAddress(initialData[key] );
+                    _d['ad_city']= cityToArray( adArr[0] );
+                    _d['ad_detail'] = adArr[1];
+                 }else{
+                     //原始值为null或undefined ，数据来源主要是从总后台直接创建项目
+                     _d['ad_city']= [];
+                     _d['ad_detail'] ="";
+                 }
              }else{
                  _d[key]= initialData[key];
              }

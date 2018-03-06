@@ -45,6 +45,7 @@ export default (state = initState , action) =>{
                 ...state,
                 buildingList:{
                     status:'failure',
+                    errMsg:action.error.statusText
                 }
             }
         }
