@@ -84,11 +84,11 @@ class Login extends React.Component{
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
-                sm: { span: 5 },
+                sm: { span: 6 },
             },
             wrapperCol: {
                 xs: { span: 24 },
-                sm: { span: 19 },
+                sm: { span: 18 },
             },
             };
         return(

@@ -46,7 +46,7 @@ const originalReducers = {
 }
 
 const reducer =  combineReducers(originalReducers)
-const middleWare = [promise,authorized]
+const middleWare = [promise]
 
 const storeEnhancers = compose(
   applyMiddleware(...middleWare),

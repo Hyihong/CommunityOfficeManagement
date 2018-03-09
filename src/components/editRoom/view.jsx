@@ -119,7 +119,8 @@ class EditBuildingModal extends React.Component {
                                  }},
                                 {required:true,message:"房间代码不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
-                                {whitespace:true,message:"请勿输入空格"}
+                                {whitespace:true,message:"请勿输入空格"},
+                                {max:15,message:"最多只能包含15个字符"}
                                 ]
                         })(
                         <Input
@@ -137,6 +138,7 @@ class EditBuildingModal extends React.Component {
                                  }},
                                  {required:true,message:"房间名称不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
+                                {max:15,message:"最多只能包含15个字符"}
                                 ]
                         })(
                         <Input
@@ -154,6 +156,7 @@ class EditBuildingModal extends React.Component {
                                  }},
                                  {required:true,message:"业主名称不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
+                                {max:15,message:"最多只能包含15个字符"}
                                 ]
                         })(
                         <Input

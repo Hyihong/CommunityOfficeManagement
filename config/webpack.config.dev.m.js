@@ -198,10 +198,17 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          require.resolve('style-loader'),
+          
+          {
+            loader: require.resolve('style-loader'),
+            options:{
+              sourceMap:true,
+            }
+          },
           {
             loader: require.resolve('css-loader'),
             options: {
+              sourceMap:true,
               importLoaders: 1,
             },
           },
@@ -233,9 +240,15 @@ module.exports = {
             test: /\.less$/,
             //include: paths.appSrc,
             use: [{
-                loader: "style-loader" // creates style nodes from JS strings
+                loader: "style-loader", // creates style nodes from JS strings
+                options:{
+                   sourceMap: true,
+                }
             }, {
-                loader: "css-loader" // translates CSS into CommonJS
+                loader: "css-loader", // translates CSS into CommonJS
+                options:{
+                  sourceMap: true,
+               }
             }, {
                 loader: "less-loader",// compiles Less to CSS
                 options:{

@@ -85,7 +85,7 @@ class EditBuilding extends React.Component {
                     <InputItem 
                         {...getFieldProps('bdName',{
                             initialValue: state.name,
-                            rules: [{required: true,message:"楼栋名称不能为空"},{pattern:/^\S+$/,message:"楼栋名称请勿包含空格"}],
+                            rules: [{required: true,message:"楼栋名称不能为空"},{pattern:/^\S+$/,message:"楼栋名称请勿包含空格"},{max:15,message:"楼栋名称不能超过15个字符"}],
                         })} 
                         placeholder="请输入楼栋名称"
                            >楼栋名称

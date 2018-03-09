@@ -3,14 +3,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { postEditForm  } from './actions'
 import { actions as roomListAction} from "../roomList"
-import { List,Flex, InputItem,WhiteSpace,Toast} from 'antd-mobile'
+import { List,Flex, InputItem,WhiteSpace,Toast,Radio} from 'antd-mobile'
 import { createForm } from 'rc-form';
 
 import TopNav from '../shared/views/TopNav'
 import './style.less'
  
 const { editRoomData } = roomListAction ;
-
+const RadioItem = Radio.RadioItem;
 //编辑房间View
 class EditBuilding extends React.Component {
     componentDidMount(){
@@ -66,8 +66,9 @@ class EditBuilding extends React.Component {
     render(){
         const { getFieldProps } = this.props.form;
         const { state } = this.props.location;
+        console.log( this.props.location.state)
         return(
-             <div>
+             <div className="editRoomForm">
                 <TopNav home title="编辑房间" check onCheckClick={ this.onSubmit }></TopNav> 
                 <WhiteSpace></WhiteSpace>  
                 <List> 
@@ -83,10 +84,10 @@ class EditBuilding extends React.Component {
                     <InputItem 
                         {...getFieldProps('roomName',{
                             initialValue: state.name,
-                            rules: [{required: true,message:"房间名称不能为空"},{pattern:/^\S+$/,message:"房间名称请勿包含空格"}],
+                            rules: [{required: true,message:"房间号不能为空"},{pattern:/^\S+$/,message:"房间号请勿包含空格"},{max:15,message:"房间号不能超过15个字符"}],
                         })} 
-                        placeholder="请输入房间名称"
-                           >房间名称
+                        placeholder="请输入房间号"
+                           >房间号
                     </InputItem>
                     <InputItem 
                         {...getFieldProps('residentName',{
@@ -104,6 +105,20 @@ class EditBuilding extends React.Component {
                         placeholder="请输入业主电话"
                            >业主电话
                     </InputItem>
+        
+                    
+                    <List.Item 
+                        {...getFieldProps('residentGender',{
+                            initialValue: state.grender,
+                        })} 
+                    >
+                        <div><span style={{marginRight:"20px"}}>业主性别</span>
+                            <Radio name="gender">男</Radio> 
+                            <Radio name="gender">女</Radio> 
+                        </div>
+                    </List.Item>
+
+
                 </List>   
             </div>
           

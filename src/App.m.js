@@ -54,6 +54,7 @@ class App extends React.Component{
        
     }
     componentDidMount(){
+        let that = this;
         document.addEventListener("touchstart", function(){}, true);
          //屏幕方向检测
          const _o = this.detectScreen() ;
@@ -66,14 +67,20 @@ class App extends React.Component{
         
         //监听屏幕方向
         let evt = "onorientationchange" in window ? "orientationchange" : "resize";
-        window.addEventListener(evt,()=>{
-            let _o2 = this.detectScreen();
-            this.props.saveOrientation(_o2);
-            if(_o2 === 'l'){
-                Toast.info(WARNING_INFO,2)
-            }else if( _o2 === 'unknow'){
-                window.reload();
-            }
+        window.addEventListener(evt,(e)=>{
+            setTimeout(function(){
+                //延时监听
+                let _o2 = that.detectScreen();
+                that.props.saveOrientation(_o2);
+                console.log(_o2)
+                if(_o2 === 'l'){
+                    Toast.info(WARNING_INFO,2)
+                }else if( _o2 === 'unknow'){
+                    window.reload();
+                }
+
+            },0)
+            
         },false);
     }
     detectScreen(){
@@ -125,5 +132,7 @@ const mapDispatchToProps = (dispatch) => {
  }
 
 export default connect(null,mapDispatchToProps)(App);
+
+
 
 

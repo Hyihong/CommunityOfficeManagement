@@ -101,10 +101,10 @@ class CreateBuilding extends React.Component {
                             </div>
                             <WhiteSpace></WhiteSpace>
                             <div className="leelen-input-section">
-                                <p className="tip">房间名称</p>
+                                <p className="tip">房间号</p>
                                 <InputItem 
-                                    {...getFieldProps('roomName',{
-                                        rules: [{required: true,message:"房间名称不能为空"},{pattern:/^\S+$/,message:"房间名称请勿包含空格"}],
+                                    {...getFieldProps('房间号',{
+                                        rules: [{required: true,message:"房间名称不能为空"},{pattern:/^\S+$/,message:"房间名称请勿包含空格"},{max:15,message:"房间号不能超过15个字符"}],
                                     })} 
                                     placeholder="请输入房间名称"
                                     >
@@ -133,9 +133,10 @@ class CreateBuilding extends React.Component {
                                     >
                                 </InputItem>
                             </div>
-                            <div className="tip" style={{marginTop:"10px"}}>业主性别
+                            <div className="tip" style={{marginTop:"10px"}}>
+                                业主性别
                                 <Radio name="gender"  checked={this.state.gender === "1"} onChange={() => this.onRadioChange("1")}>男</Radio> 
-                                <Radio name="gender"  checked={this.state.gender === "0"}onChange={() => this.onRadioChange("0")}>女</Radio> 
+                                <Radio name="gender"  checked={this.state.gender === "0"} onChange={() => this.onRadioChange("0")}>女</Radio> 
                             </div>
                             
                         </List> 

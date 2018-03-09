@@ -131,6 +131,7 @@ class RoomList extends React.Component {
     }
     
     _renderRow=(rowData,rowId,sectionId)=>{
+         console.log( rowData )
          return(
             <Animate  transitionName="fade" transitionAppear >
                 <div  className={ `build-item ${ rowData.Status ? "enable":"disable"}`} >
@@ -158,6 +159,7 @@ class RoomList extends React.Component {
                                             name : rowData.Name,
                                             residentName:rowData.ResidentName,
                                             residentPhone:rowData.ResidentPhone,
+                                            gender:rowData.Gender,
                                             buildingID:  getQueryString( this.props.location.search,'ID' )
                                         }
                                         }}><icon className="fa fa-edit" style={{fontSize:"16px",lineHeight:"16px",marginRight:"5px"}}></icon>

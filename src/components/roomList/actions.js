@@ -32,19 +32,25 @@ export const fetchRoomInfo = ( buildingID) =>{
 }
 
 //新增房间
-export const AddNewRoomToList = (roomId,code,name,residentName,tel,gender) =>{
-    console.log(gender)
+// export const AddNewRoomToList = (roomId,code,name,residentName,tel,gender) =>{
+//     console.log(gender)
+//     return{
+//         type:ADD_ROOM,
+//         ID:roomId,
+//         Code:code,
+//         Name:name,
+//         ResidentName:residentName,
+//         ResidentPhone:tel,
+//         Gender:gender==1?"男":"女"
+//     }
+// }
+export const AddNewRoomToList = ({...argument}) =>{
     return{
         type:ADD_ROOM,
-        ID:roomId,
-        Code:code,
-        Name:name,
-        ResidentName:residentName,
-        ResidentPhone:tel,
-        Gender:gender==1?"男":"女"
+        ...argument,
+        Gender: argument.Gender==1?"男":"女"
     }
 }
-
 //编辑房间
 //根据房间ID,房间code 和 房间name, 修改房间列表
 export const editRoomData = ({...argument}) =>{ 

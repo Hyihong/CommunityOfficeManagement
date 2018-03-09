@@ -39,8 +39,9 @@ class CreateRoomModal extends React.Component {
          if( nextProps.status === 'success' &&  nextProps.status!== status ){
             //todo...将新数据插入房间列表
             const _new = nextProps.newRoomData ;
-            this.props.AddNewRoomToList(_new.roomid,_new.roomcode, _new.roomname,_new.residentname, _new.residentphone,_new.residentgender);
-    
+             console.log(_new)
+            // this.props.AddNewRoomToList(_new.roomid,_new.roomcode, _new.roomname,_new.residentname, _new.residentphone,_new.residentgender);
+                this.props.AddNewRoomToList({..._new})
             //end
             history.goBack()
             Modal.success({
@@ -99,7 +100,11 @@ class CreateRoomModal extends React.Component {
                         getFieldDecorator('roomCode',{
                             rules:[
                                 {transform:(transformedValue) =>{
-                                    return transformedValue._trim();
+                                    if( transformedValue === undefined ||  transformedValue === null){
+                                        return undefined;
+                                    }else{
+                                        return transformedValue._trim();
+                                    }
                                 }},
                                 {required:true,message:"房间代码不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
@@ -117,7 +122,11 @@ class CreateRoomModal extends React.Component {
                         getFieldDecorator('roomName',{
                             rules:[
                                 {transform:(transformedValue) =>{
-                                    return transformedValue;
+                                    if( transformedValue === undefined ||  transformedValue === null){
+                                        return undefined;
+                                    }else{
+                                        return transformedValue._trim();
+                                    }
                                 }},
                                 {required:true,message:"房间名称不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
@@ -133,6 +142,13 @@ class CreateRoomModal extends React.Component {
                         {
                         getFieldDecorator('residentName',{
                             rules:[
+                                {transform:(transformedValue) =>{
+                                    if( transformedValue === undefined ||  transformedValue === null){
+                                        return undefined;
+                                    }else{
+                                        return transformedValue._trim();
+                                    }
+                                }},
                                 {required:true,message:"业主姓名不能为空"},
                                 {pattern:/^\S+$/,message:"请勿包含空格"},
                                 {max:10,message:"最多只能包含10个字符"}

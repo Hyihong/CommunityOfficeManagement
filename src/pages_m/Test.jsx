@@ -19,98 +19,12 @@ class Test extends React.Component {
   render(){
     const { getFieldProps } = this.props.form;
     return (
-      <div id="test-panel"> 
-        <List renderHeader={() => 'Customize to focus'}>
-          <TextareaItem
-            title="标题"
-            placeholder="auto focus in Alipay client"
-            data-seed="logId"
-            ref={el => this.autoFocusInst = el}
-            autoHeight
-          />
-          <TextareaItem
-            title="标题"
-            placeholder="click the button below to focus"
-            data-seed="logId"
-            autoHeight
-           
-          />
-          <List.Item>
-            <div
-              style={{ width: '100%', color: '#108ee9', textAlign: 'center' }}
-              onClick={() => this.customFocusInst.focus()}
-            >
-              click to focus
-            </div>
-          </List.Item>
-        </List>
-
-        <List renderHeader={() => 'Whether is controlled'}>
-          <TextareaItem
-            {...getFieldProps('control')}
-            title="受控组件"
-            placeholder="controlled"
-          />
-          <TextareaItem
-            title="非受控组件"
-            placeholder="please input content"
-            clear
-          />
-        </List>
-
-        <textarea name="" id="" cols="30" rows="2"></textarea>
-
-        <List renderHeader={() => 'Whether is controlled'}>
-          <TextareaItem
-            {...getFieldProps('control')}
-            title="受控组件"
-            placeholder="controlled"
-          />
-          <TextareaItem
-            title="非受控组件"
-            placeholder="please input content"
-            clear
-          />
-        </List>
-        <List renderHeader={() => 'Whether is controlled'}>
-          <TextareaItem
-            {...getFieldProps('control')}
-            title="受控组件"
-            placeholder="controlled"
-          />
-          <TextareaItem
-            title="非受控组件"
-            placeholder="please input content"
-            clear
-          />
-        </List>
-        <List renderHeader={() => 'Auto / Fixed height'}>
-          <TextareaItem
-            {...getFieldProps('note3')}
-            title="高度自适应"
-            autoHeight
-            labelNumber={5}
-          />
-          <TextareaItem/>
-          <TextareaItem
-            {...getFieldProps('note3')}
-            title="高度自适应"
-            autoHeight
-            labelNumber={5}
-          />
-          <TextareaItem/>
-          <TextareaItem
-            {...getFieldProps('note3')}
-            title="测试框"
-            ref={el => this.customFocusInst = el}
-            autoHeight
-            labelNumber={5}
-          />
-        </List>
-        
-        <InputItem >Input框</InputItem>
-
+      <div>
+          <div>{ "1021-10-10" } </div>
+          <p>1021-10</p>
       </div>
+      
+    
     );
   }
 };

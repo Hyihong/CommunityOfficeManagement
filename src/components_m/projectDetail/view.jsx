@@ -74,7 +74,7 @@ class ProjectDetail extends React.Component {
                                     </ul>
                                 </Item>
                                 <Item><b>码号类型</b></Item>
-                                <Item><b>数量</b></Item>
+                                <Item><b>码号</b></Item>
                             </Flex>
                             <div className="leelen-detail-list-body" style={{height:this.state.listHeight}} ref={el => this.listbody = el }>
                                 { this.props.data.CallingNumberPool.map( record =>{

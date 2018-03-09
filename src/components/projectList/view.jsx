@@ -190,7 +190,7 @@ class List extends React.Component {
                 {/* select section */}
                 <div className="lee-filter">
                     <Row type="flex" justify="center" >
-                        <Col lg={{span:9}} md={{span:10}} sm={{span:11}} xs={{span:18}} >
+                        <Col lg={{span:10}} md={{span:10}} sm={{span:12}} xs={{span:18}} >
                             <Form>
                                 <Item label="组织机构：" labelCol={{ lg:{span:4}, md:{span:5} , sm:{span:5} ,xs:{span:5} } }
                                       wrapperCol={{ lg:{span:20}, md:{span:19} , sm:{span:19},xs:{span:19} } }>

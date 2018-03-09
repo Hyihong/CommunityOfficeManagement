@@ -65,14 +65,37 @@ function cityToArray( st ) {
     }
     return cityArr;
 }
-
+//设置输入框数值范围
+function validatePrimeNumber(number) {
+    if (number>0 && number<=100000) {
+        return {
+            validateStatus: 'success',
+            errorMsg: null,
+        };
+    }
+    else if(number<1){
+        return {
+            validateStatus: 'error',
+            errorMsg: '最小值不能低于1',
+        };
+    }
+    else {
+        return {
+            validateStatus: 'error',
+            errorMsg: '最大值不能超过100000',
+        };
+    }
+}
 class ApplyModify extends React.Component{ 
 constructor(props){
     super(props);
     this.state = {
         city:[],
-        formInit:[]
-    }
+        formInit:[],
+        number: {
+            value:'',
+        },
+    };
 }
 componentWillMount(){
     document.title="修改项目申请信息"
@@ -117,6 +140,15 @@ componentWillReceiveProps(nextProps){
     
         }
     }
+}
+
+handleNumberChange = (value) =>{
+    this.setState({
+        number: {
+            ...validatePrimeNumber(value),
+            value,
+        }
+    })
 }
 
 handleSubmit =(e)=>{
@@ -312,11 +344,13 @@ return (
             <FormItem
                  {...formItemLayout}
                  label="设备数量"
+                 validateStatus={this.state.number.validateStatus}
+                 help={this.state.number.errorMsg}
             > {
                 getFieldDecorator('deviceCount',{
                     initialValue:_d.DeviceCount
                 })(
-                    <InputNumber  min={1} max={2147483647} style={{width:"100%"}}/>
+                    <InputNumber  min={1} max={100000} style={{width:"100%"}} onChange={this.handleNumberChange}/>
                 )
             }
             </FormItem>
